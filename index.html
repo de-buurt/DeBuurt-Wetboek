@@ -3,851 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overheid De Buurt | Officiële APV Portal</title>
+    <title>De BuurtRP - Management Handboek & Wetboek</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a2a3a;
-            --accent: #f39c12;
-            --bg: #f0f2f5;
-            --white: #ffffff;
-            --sidebar-width: 280px;
+            --main-bg: #121212;
+            --sidebar-bg: #1a1a1a;
+            --accent-orange: #ff6600;
+            --text-color: #e0e0e0;
+            --card-bg: #242424;
         }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); margin: 0; display: flex; color: #333; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--main-bg); color: var(--text-color); display: flex; height: 100vh; overflow: hidden; }
 
-        /* Sidebar Navigatie */
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: var(--primary);
-            color: white;
-            position: fixed;
-            padding: 20px;
-            overflow-y: auto;
-            border-right: 4px solid var(--accent);
-        }
+        /* Sidebar Styling */
+        .sidebar { width: 320px; background-color: var(--sidebar-bg); border-right: 2px solid var(--accent-orange); display: flex; flex-direction: column; }
+        .logo-container { padding: 20px; text-align: center; border-bottom: 1px solid #333; }
+        .logo-container img { max-width: 110px; border-radius: 50%; border: 3px solid var(--accent-orange); }
+        .nav-links { list-style: none; overflow-y: auto; flex: 1; padding: 10px; }
+        .nav-links li { padding: 10px 12px; margin-bottom: 5px; border-radius: 5px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; font-size: 14px; }
+        .nav-links li i { margin-right: 10px; color: var(--accent-orange); width: 20px; text-align: center; }
+        .nav-links li:hover, .nav-links li.active { background-color: var(--accent-orange); color: #000; font-weight: bold; }
+        .nav-links li:hover i, .nav-links li.active i { color: #000; }
 
-        .sidebar h2 { font-size: 1.2rem; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 20px; color: var(--accent); }
-        .sidebar a { display: block; color: #ddd; text-decoration: none; padding: 12px 10px; border-radius: 5px; transition: 0.3s; font-size: 0.95rem; margin-bottom: 5px; }
-        .sidebar a:hover { background: rgba(255,255,255,0.1); color: white; }
-        .sidebar a i { margin-right: 10px; width: 20px; text-align: center; }
-
-        /* Main Content Area */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            width: calc(100% - var(--sidebar-width));
-            padding: 40px;
-        }
-
-        header {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-            border-left: 10px solid var(--primary);
-        }
-
-        header h1 { margin: 0; color: var(--primary); font-size: 2.2rem; }
-        header p { margin: 10px 0 0; color: #666; font-style: italic; }
-
-        .section-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-
-        h2 { color: var(--primary); font-size: 1.6rem; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; }
+        /* Content Area */
+        .content { flex: 1; padding: 40px; overflow-y: auto; background: radial-gradient(circle at top right, #22140a, var(--main-bg) 60%); }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s; }
         
-        .artikel {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: #fafafa;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
+        /* Typography & Elements */
+        h1 { color: var(--accent-orange); margin-bottom: 20px; border-bottom: 2px solid var(--accent-orange); padding-bottom: 10px; font-size: 28px; }
+        h2 { margin: 25px 0 10px 0; color: #fff; border-left: 4px solid var(--accent-orange); padding-left: 10px; font-size: 20px; }
+        h3 { margin: 15px 0 5px 0; color: #fff; font-size: 16px; }
+        p { margin: 10px 0; line-height: 1.6; }
+        ul, ol { margin: 10px 0 20px 25px; line-height: 1.6; }
+        li { margin-bottom: 5px; }
+        
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; margin: 15px 0 25px 0; background: var(--card-bg); border-radius: 6px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #333; }
+        th { background-color: var(--accent-orange); color: #000; font-weight: bold; }
+        tr:hover { background-color: #2e2e2e; }
 
-        .artikel-header {
-            font-weight: bold;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-        }
+        /* Highlights */
+        .badge { background: #333; color: var(--accent-orange); padding: 2px 8px; border-radius: 4px; font-weight: bold; font-family: monospace; }
+        .alert-box { background: rgba(255, 102, 0, 0.1); border-left: 4px solid var(--accent-orange); padding: 15px; margin: 20px 0; border-radius: 4px; }
 
-        .artikel-header::before {
-            content: "§";
-            color: var(--accent);
-            margin-right: 8px;
-            font-size: 1.3rem;
-        }
-
-        .lid { display: block; margin-left: 20px; margin-bottom: 8px; font-size: 1rem; color: #444; }
-        .lid b { color: #000; }
-
-        footer { text-align: center; padding: 40px; color: #888; font-size: 0.9rem; }
-
-        /* Mobiele versie */
-        @media (max-width: 900px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 4px solid var(--accent); }
-            .main-content { margin-left: 0; width: 100%; padding: 20px; }
-        }
-
-        .badge {
-            background: var(--accent);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h2><i class="fas fa-gavel"></i> De Buurt APV</h2>
-    <a href="#APV"><i class="fas fa-info-circle"></i> APV</a>
-    <a href="#Algemeen"><i class="fas fa-info-circle"></i> Algemeen</a>
-    <a href="#Openbareorde"><i class="fas fa-shield-alt"></i> Openbare Orde</a>
-    <a href="#Verkeer"><i class="fas fa-car"></i> Verkeer</a>
-    <a href="#Rijontzeggingen"><i class="fas fa-car"></i> Rijontzeggingen & Inbeslagnames</a>
-    <a href="#Drugshandel"><i class="fas fa-skull-crossbones"></i> Criminaliteit - Drugshandel & Productie</a>
-    <a href="#Vermogensdelicten"><i class="fas fa-skull-crossbones"></i> Criminaliteit - Vermogensdelicten</a>
-    <a href="#Geweld"><i class="fas fa-skull-crossbones"></i> Criminaliteit - Geweld</a>
-    <a href="#Wapens"><i class="fas fa-skull-crossbones"></i> Criminaliteit - Wapens</a>
-    <a href="#Slotbepalingen"><i class="fas fa-balance-scale"></i> Slotbepalingen</a>
-    <div style="margin-top: 50px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 5px; font-size: 0.8rem; line-height: 1.4;">
-        <b>Status:</b> <span style="color: #2ecc71;">● Actief</span><br>
-        <b>Versie:</b> 2026.04.1<br>
-        <b>Laatste update:</b> 03-04-2026
-    </div>
-</div>
-
-<div class="main-content">
-    <header>
-        <h1>Algemene Plaatselijke Verordening <span class="badge">OFFICIEEL</span></h1>
-        <p>Gepubliceerd door de Wijkraad van De Buurt. Geldig binnen de gehele jurisdictie.</p>
-    </header>
-    <div id="APV" class="section-card">
-        <h2>APV: Algemene Plaatselijke Verordening</h2>
-        <div class="artikel">
-            <span class="lid"><b>In de buurt hebben we regels opgesteld om het spel leuk en eerlijk te houden voor iedereen.<br>Deze regels zijn los van de echte wetgeving, die door de politie wordt gehandhaafd.<br>Onze stadsregels worden gehandhaafd door de gemeente(bestuur) & wijkagenten (admins).<br> Zie je iets dat tegen de regels ingaat? Gebruik dan /report.<br>Als er geen gemeente of wijkagent online is maak dan een ticket in Discord.</b></span>
-            <span class="lid"><b>De buurt RP is een roleplay-omgeving waarin realistisch en geloofwaardig gedrag wordt verwacht. <br> Bij twijfel vraag een wijkagent.</b></span>           
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="de_buurt_logo.jpg" alt="De Buurt Logo">
+            <h3 style="margin-top:10px; color:white; font-size: 18px;">De BuurtRP</h3>
+            <span style="color: #888; font-size: 12px;">Handboek V3 PRO</span>
         </div>
-        <h2>APV: Geldigheid</h2>
-        <div class="artikel">
-            <span class="lid"><b>1. Staffleden mogen niet deelnemen aan beslissingen over zaken waarbij zijzelf betrokken zijn.</b></span>
-            <span class="lid"><b>2. Wordt er tegen staff gelogen en kan dit met overtuigend bewijs (zoals logs) worden aangetoond,dan kan de straf worden verzwaard.</b></span>
-            <span class="lid"><b>3. Tickets die na 7 dagen pas worden ingedient worden niet in behandeling genomen.</b></span>        
-        </div>
-        <h2>APV: Strafbepaling</h2>
-        <div class="artikel">
-            <span class="lid"><b>Straffen zijn onderverdeeld in de volgende categorieen:</b></span>
-            <span class="lid"><b>Cat1. Een waarschuwing (Maximaal 2 waarschuwingen in 1 maand; hierna volgt een verzwaring naar Cat 2.)</b></span>
-            <span class="lid"><b>Cat2. Een ban van 2 dagen</b></span>
-            <span class="lid"><b>Cat3. Een ban van 4 dagen</b></span>
-            <span class="lid"><b>Cat4. Een ban van 7 dagen</b></span>    
-            <span class="lid"><b>Cat5. Een ban van 14 dagen</b></span>
-            <span class="lid"><b>Cat6. Permanente ban, na 14 dagen kan je een verzoek indienen via Discord om de ban op te heffen.</b></span>
-            <span class="lid"><b>Cat7. Account verwijdering.</b></span>
-            <br><br>
-            <span class="lid"><b>Cat 6 & 7 kunnen preventief worden ingezet.</b></span>
-            <br><br>
-            <span class="lid"><b>Staff behoudt te allen tijde het recht om af te wijken van standaard sancties.</b></span>
-            <br><br>
-            <span class="lid"><b>Spelers hebben het recht om een sanctie aan te vechten via een ticket in Discord.</b></span>
-        </div>
-        <h2>APV: Out Of Character (OOC)</h2>
-        <div class="artikel">
-            <span class="lid"><b>Respectvol gedrag wordt te allen tijde verwacht, zowel IC als OOC.<br>Het is verboden om: - Beledigend, intimiderend of provocerend OOC-gedrag te vertonen.<br>Conflicten worden via roleplay of staff afgehandeld.<br><br>niet via OOC-confrontaties.<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Karakter en kleding</h2>
-        <div class="artikel">
-            <span class="lid"><b>Bij eerste toegang tot de stad dient het karakter correct en realistisch te worden ingesteld.<br>Het gebruik van bugged, onzichtbare of foutief weergegeven kleding (zoals ontbrekende armen, handen of texturen) is niet toegestaan.<br><br>Sanctie: Cat1</b></span>
-        </div>
-        <h2>APV: Server crash / restart</h2>
-        <div class="artikel">
-            <span class="lid"><b>Roleplay dient na een servercrash of restart te worden hervat waar deze is onderbroken.<br>Spelers zijn verplicht terug te keren naar het scenario wanneer zij door een crash of restart zijn weggevallen.<br>Het misbruiken van crashes of restarts om roleplay te ontwijken valt onder combat logging.<br><br>Sanctie: Cat1</b></span>
-        </div>
-        <h2>APV: Scenario afronden</h2>
-        <div class="artikel">
-            <span class="lid"><b>Een gestart roleplay-scenario dient altijd op een realistische wijze te worden afgerond.<br>Het niet terug keren spelers zijn geen reden om het scenario voortijdig te beëindigen.<br>Bij ernstige verstoring kan een speler via /report of ticket staff inschakelen, maar het scenario wordt niet eigenhandig gestopt.<br><br>Sanctie: Cat1</b></span>
-        </div>
-        <h2>APV: Overvallen / beroven</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het overvallen of beroven van spelers zonder duidelijke roleplay-aanleiding is verboden.<br>Een slachtoffer dient altijd de mogelijkheid te krijgen om te reageren binnen roleplay.<br>Geweld zonder voorafgaande roleplay-interactie kan worden aangemerkt als RDM of failRP.<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Metagamen</h2>
-        <div class="artikel">
-            <span class="lid"><b>Meta-gaming is het gebruiken van OOC-kennis binnen IC-situaties, ongeacht de bron van deze kennis (streams, Discord, clips, voice).<br>Het is de verantwoordelijkheid van de speler om IC en OOC informatie strikt gescheiden te houden.<br><br>Sanctie: Cat3</b></span>
-        </div>
-        <h2>APV: Random Death Match (RDM) & Vehicle Death Match (VDM)</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het aanvallen, verwonden of doden van een speler zonder duidelijke en voorafgaande roleplay-interactie is verboden.<br>Het opzettelijk aanrijden van spelers met een voertuig met als doel schade of dood te veroorzaken (VDM) is verboden.<br><br>Sanctie: Cat3</b></span>
-        </div>
-        <h2>APV: Fail RP</h2>
-        <div class="artikel">
-            <span class="lid"><b>Fail-RP is gedrag waarbij een speler bewust of herhaaldelijk handelt op een manier die niet realistisch, geloofwaardig of logisch is binnen de setting.<br>Hieronder vallen onder andere:<br>- Het negeren van directe dreiging (wapens, overmacht, verwondingen)<br>- Onrealistische handelingen na ernstig letsel<br>- Het forceren van scenario’s zonder ruimte voor tegenspel<br>- Het bewust breken van roleplay-logica voor eigen voordeel<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Powergaming</h2>
-        <div class="artikel">
-            <span class="lid"><b>Powergaming is het forceren van roleplay door het gebruiken van onrealistische acties, mechanics of scenario’s waardoor andere spelers geen realistische tegenreactie kunnen geven.<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Nieuw Leven Regel (NLR)</h2>
-        <div class="artikel">
-            <span class="lid"><b>Wanneer een character overlijdt en wordt gerespawned, geldt de Nieuw Leven Regel (NLR).<br>Dit houdt in:<br>- De character herinnert zich niets van de gebeurtenissen die hebben geleid tot het overlijden<br>- De character mag niet terugkeren naar de locatie van het incident<br>- De character mag geen wraak zoeken of informatie delen<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Exploits, bug-abuse of mechanic-misbruik</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het misbruiken van bugs, glitches, exploits of onbedoelde mechanics is te allen tijde verboden.<br>Spelers zijn verplicht om:<br>- Bugs of exploits direct te melden bij staff<br>- Geen voordeel te halen uit foutieve scripts, UI of mechanics<br><br>Het bewust misbruiken hiervan kan leiden tot:<br>- zware sancties, ongeacht of er expliciet voordeel is behaald.<br><br>Sanctie: Cat2/4</b></span>
-        </div>
-        <h2>APV: No Value of Life (NVL)</h2>
-        <div class="artikel">
-            <span class="lid"><b>Van elke speler wordt verwacht dat hij of zij realistisch waarde hecht aan het leven van het eigen personage.<br><br>Roekeloos gedrag, herhaald negeren van dreiging of het bewust opzoeken van levensgevaar zonder geldige roleplay-reden kan worden aangemerkt als:<br>- NVOL<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Hacken, Cheaten of Modden</h2>
-        <div class="artikel">
-            <span class="lid"><b>Elke vorm van cheats, hacks of modpacks die voordeel geven is verboden.<br><br>Sanctie: Cat5</b></span>
-        </div>
-        <h2>APV: Criminele activiteiten</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het maximale aantal deelnemers per scenario geldt per criminele groepering.<br>Spelers die direct of indirect betrokken zijn bij het scenario worden meegeteld, ongeacht of zij fysiek op locatie aanwezig zijn.<br>Toegestane aantallen:<br><br>- Huisoverval: max 3 (max 2 fysiek op locatie)<br>- Winkeloverval: max 3 (max 2 fysiek op locatie<br>- Truck / Juwelier / Fleeca / Paleto: max 6<br>- Pacific Bank: max 8<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Stemherkenning</h2>
-        <div class="artikel">
-            <span class="lid"><b>Herkenning van personen mag uitsluitend plaatsvinden op basis van:<br>- Natuurlijke stem<br>- Zichtbare kleding<br> - Voertuig<br>- Zichtbare tattoos<br><br>Stemherkenning is alleen geldig indien:<br>- Er geen stemvervorming actief is<br>- De stem duidelijk en consistent herkenbaar is<br><br>Sanctie: Cat3</b></span>
-        </div>
-        <h2>APV: vriendenscenario’s</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het opzetten van overvallen of gijzelingen met bekende spelers met als doel economisch voordeel of mechanisch misbruik is verboden.<br>Roleplay mag niet worden misbruikt om geld, items of voordeel kunstmatig te genereren.<br><br>Sanctie: Cat3</b></span>
-        </div>
-        <h2>APV: Belediging en discriminatie</h2>
-        <div class="artikel">
-            <span class="lid"><b>Beledigend, intimiderend of discriminerend taalgebruik gericht op echte kenmerken (zoals ras, afkomst, ziekte, seksualiteit of religie) is verboden.<br>Gebruik van ziektes als scheldwoord valt onder zero tolerance.<br><br>Sanctie: Cat4</b></span>
-        </div>
-        <h2>APV: Overnemen van criminele activiteiten</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het overnemen van een actief crimineel scenario is alleen toegestaan indien:<br>- Er nog geen politie bij betrokken is.<br>- Het logisch voortkomt uit roleplay.<br><br>Sanctie: Cat3</b></span>
-        </div>
-        <h2>APV: Real Money</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het verkopen, ruilen of aanbieden van in-game geld, items of diensten tegen echt geld of externe voordelen is verboden.<br>Het promoten of faciliteren van dergelijke transacties valt hier eveneens onder.<br><br>Sanctie: Cat5</b></span>
-        </div>
-        <h2>APV: Ontvoering van overheidspersoneel</h2>
-        <div class="artikel">
-            <span class="lid"><b>Politie mag alleen worden ontvoerd indien minimaal 4 agenten actief in dienst zijn.<br>Ziekenhuispersoneel mag alleen worden ontvoerd indien minimaal 5 medewerkers actief in dienst zijn.<br><br>Sanctie: Cat1</b></span>
-        </div>
-        <h2>APV: Diefstal van overheidsvoertuigen, -materiaal en politie-uitrusting</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het stelen van overheidsvoertuigen, overheidsmateriaal of politie-uitrusting is verboden.<br>Ook de voertuigen van de pechhulp vallen onder overheidsvoertuigen.<br>Het looten/zakkenrollen van neergehaalde, bewusteloze of geboeide overheidspersoneel, ongeacht het item is verboden.<br> tenzij staff expliciet toestemming geeft voor een speciaal scenario of evenement.<br><br>Sanctie: Cat3-5</b></span>
-        </div>
-        <h2>APV: Combat Logging</h2>
-        <div class="artikel">
-            <span class="lid"><b>Combat logging is het bewust verlaten van de server om een roleplay- situatie, dreiging of consequentie te ontlopen.<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Corruptie binnen de Overheidsdiensten</h2>
-        <div class="artikel">
-            <span class="lid"><b>Corruptie door overheidspersoneel (Politie & Ambulance en pechhulp) is niet toegestaan.<br><br>Sanctie: Cat5</b></span>
-        </div>
-        <h2>APV: Neergaan & Ziekenhuis / Ambulance Roleplay</h2>
-        <div class="artikel">
-            <span class="lid"><b>1e fase:<br><br>Zwaar gewond (op de zij)<br>Wanneer een character op de zij ligt, wordt deze beschouwd als zwaar gewond en niet langer actief in staat om deel te nemen aan het lopende scenario.<br><br>Tijdens deze fase geldt:<br><br>De character mag worden geholpen door Ambulance personeel<br>De character onthoudt wat er is gebeurd.<br>De character mag niet actief deelnemen.<br>De character mag niet direct terugkeren naar hetzelfde scenario na behandeling van Ambulance personeel.<br> Er geldt een minimale hersteltijd van 15 minuten<br><br>2e Downfase<br><br>Overleden (op de rug)<br>Wanneer een character op de rug ligt en leeggebloed is, wordt deze beschouwd als overleden.<br><br>In deze situatie geldt:<br><br>De speler dient te respawnen.<br>De character herinnert zich niets van het volledige scenario dat heeft geleid tot de dood.<br>Er mag geen wraak worden genomen.<br>Er mag geen informatie worden gedeeld of gebruikt uit het voorafgaande scenario.<br>De character mag niet terug gaan naar de locatie van het incident.<br><br>Dit betreft een New Life Rule<br><br>Sanctie: Cat1-2</b></span>
-        </div>
-        <h2>APV: Werkgebieden Overheidsdiensten</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het hoofdeiland valt onder reguliere handhaving door Politie, Ambu en Pechhulp.<br>Aangrenzende eilanden kunnen beperkte handhaving kennen.<br><br>Dit betekent niet dat de APV of serverregels komen te vervallen.<br><br>Sanctie: Cat5</b></span>
-        </div>
-        <h2>APV: Cooldownregels</h2>
-        <div class="artikel">
-            <span class="lid"><b>Na intensieve conflictscenario’s geldt een verplichte cooldown-periode.<br><br>cooldown-periodes:<br><br>Kleine gewapende confrontatie: 30 minuten<br>Grote schietpartij: 60 minuten<br>Massaal conflict of meerdere betrokken partijen: 90 minuten<br><br>Tijdens een cooldown is het verboden om:<br><br>Opnieuw een vergelijkbaar conflict te starten<br><br>Staff behoudt het recht om:<br><br>Cooldowns te verlengen bij misbruik.<br>Extra beperkingen op te leggen indien nodig.<br>Het veranderen / verplaatsen van locatie stopt de cooldown niet.<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Overheids interactie</h2>
-        <div class="artikel">
-            <span class="lid"><b>Van spelers wordt verwacht dat zij respectvol omgaan met overheidsdiensten.<br><br>Het is verboden om<br><br>Politie of hulpdiensten doelbewust te provoceren zonder RP-reden<br>Overheidsdiensten te misbruiken<br>Ambulance personeel mag niet worden beschoten.<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: audio & communicatie</h2>
-        <div class="artikel">
-            <span class="lid"><b>Voice-communicatie dient realistisch en passend te zijn.<br><br>Het is verboden om:<br><br>OOC-informatie via voice te delen<br>Overmatig soundboard<br>Stemvervorming te gebruiken zonder geldige roleplay-reden<br><br>Sanctie: Cat1</b></span>
-        </div>
-        <h2>APV: Random Inmenging</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het zonder geldige roleplay-reden mengen in bestaande conflictsituaties (third party) is verboden.<br><br>Sanctie: Cat2</b></span>
-        </div>
-        <h2>APV: Server Events</h2>
-        <div class="artikel">
-            <span class="lid"><b>Bij grootschalige roleplay-situaties (12+ spelers) wordt extra realistisch en gecontroleerd gedrag verwacht.<br>HHet bewust verstoren van massale roleplay kan leiden tot verzwaarde sancties.<br><br>Sanctie: Cat3</b></span>
-        </div>
-        <h2>APV: Serverbelang</h2>
-        <div class="artikel">
-            <span class="lid"><b>Indien gedrag structureel schadelijk is voor roleplay, community of serverstabiliteit, behoudt staff het recht direct zwaardere maatregelen te nemen.<br>Serverbelang gaat boven individuele situatie.<br><br>Sanctie: Cat4</b></span>
-        </div>
-        <h2>APV: Seksuele Roleplay</h2>
-        <div class="artikel">
-            <span class="lid"><b>Seksuele roleplay (ERP) is NIET toegestaan.<br> Ook niet als grap!<br><br>Sanctie: Cat3</b></span>
-        </div>
-        <h2>APV: Zelfmoord forceren RP</h2>
-        <div class="artikel">
-            <span class="lid"><b>Het bewust forceren van eigen overlijden om roleplay ontwijken is verboden.<br><br>Sanctie: Cat2-3</b></span>
-        </div>
-        <h2>APV: Stream / clip manipulatie</h2>
-        <div class="artikel">
-            <span class="lid"><b>Clips bewerken om ergens voordeel mee te halen is verboden.<br>Staff zal bewerkte clips zien als liegen,voordeel willen halen.<br><br>Sanctie: Cat3</b></span>
-        </div> 
-        <h2>APV: Superheld gedrag</h2>
-        <div class="artikel">
-            <span class="lid"><b>Characters dienen realistisch kwetsbaar te zijn.<br><br>Sanctie: Cat2</b></span>
-        </div>
-    <div id="Algemeen" class="section-card">
-        <h2>Hoofdstuk 1: Algemene Bepalingen</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.1: Reikwijdte</span>
-            <span class="lid">1.1.1 Deze verordening is van kracht op het gehele grondgebied van <b>De Buurt</b>.</span>
-            <span class="lid">1.2.2 Eenieder die zich binnen de stadsgrenzen bevindt, wordt geacht de APV te kennen en na te leven.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.2: Identificatieplicht</span>
-            <span class="lid">1.2.1 Op eerste vordering van een ambtenaar in functie dient een burger een geldig ID-bewijs te overhandigen.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.3: Rechtbeginsel</span>
-            <span class="lid">1.3.1 Een strafbaar feit is pas strafbaar als het op het moment van plegen is opgenomen in de wet. Een verdachte is onschuldig tot het tegendeel bewezen is en dient op basis van hoor en wederhoor te worden onderzocht.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.4: Strafbepaling</span>
-            <span class="lid">1.4.1 Straffen zijn vastgesteld en opgenomen per artikel. Hieronder vallen: waarschuwingen, celstraffen (in maanden), rijontzeggingen, (in uren), inbeslagnames of invorderingen en boetes. Een opgelegde straf kan een combinatie zijn van de bovenstaande strafvormen.</span>
-            <span class="lid">1.4.2 Straffen mogen niet hoger zijn dan de vastgestelde waarden. Wel kan een straf hoger uitvallen door het stappelen van overtredingen of verlaagd worden door verzachtende omstandigheden.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.5: Verdachte</span>
-            <span class="lid">1.5.1 Een persoon tegen wie uit feiten en omstandigheden een redelijk vermoede van schuld van enig strafbaar feit blijkt te zijn, mag worden aangemerkt als verdachte.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.6: Inbeslagname</span>
-            <span class="lid">1.6.1 Wanneer een strafbaar feit is gepleegd met een goed, of wanneer een goed uit een strafbaar feit is verkregen, kan dit goed in beslag worden genomen. De politie mag plaatsen betreden voor het doel van inbeslagneming van goederen, conform de daarvoor geldende wettelijke voorwaarden.</span>
-            <span class="lid">1.6.2 Wederechtelijk verkregen voordeel: Goederen die onomstotelijk en feitelijk bewezen zijn verworven door een strafbaar feit, of goederen die illegaal zijn verkregen.</span>
-            <span class="lid">1.6.3 Waarheidsvinding : Goederen die mogelijk verband houden met een strafbaar feit en die kunnen bijdragen aan het vaststellen van de waarheid binnen het onderzoek.</span>
-            <span class="lid">1.6.4 Verbeurdverklaring: Goederen die in beslag worden genomen met het doel deze, na rechterlijke uitspraak, te vervreemden.</span>
-            <span class="lid">1.6.5 Onttrekking aan het verkeer: Goederen die in beslag worden genomen en vervolgens ter vernietiging worden aangeboden, omdat zij niet in het maatschappelijk verkeer mogen terugkeren.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.7: Verjaring</span>
-            <span class="lid">1.7.1 Het recht tot strafvordering vervalt door verjaring: Het verjaren gebeurt na 30 dagen.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.8: Strafblad</span>
-            <span class="lid">`1.8.1 Straffen die enige vorm van celstraf bevatten kunnen leiden tot een strafblad. Een strafblad zal na een tijdsduur van 30 dagen komen te vervallen mits er in de 30 dagen geen nieuw delict wordt gepleegd.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.9: Uitsluiting</span>
-            <span class="lid">1.9.1 Noodweer: Hij die zich verdedigd tegen geweld veroorzaakt door een ander</span>
-            <span class="lid">1.9.2 Overmacht: Hij die wordt gedwongen tot enig strafbaar feit</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.10: Goederen</span>
-            <span class="lid">1.10.1 Onder goederen kan worden verstaan alles wat tussen twee personen kan worden uitgewisseld.<br>Onderzoek hiernaar mag maximaal 48 uur duren.<br>Kan er binnen 48 uur geen onderzoek afgerond worden dan is de overheid verplicht de goederen retourneren. </span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 1.11: Vormfouten</span>
-            <span class="lid">1.11.1 De rechter kan, indien blijkt dat de Politie zich niet heeft gehouden aan de voor hun geldende wetten en richtlijnen bepalen dat:<br><br>De hoogte van de straf zal worden verlaagd.<br>De resultaten van het onderzoek die door de vormfout zijn verkregen, niet mogen bijdragen.<br>De verdachte uitgesloten is van rechtsvervolging.<br><br>
-            De hierboven genoemde bepaling kan enkel worden gebruikt indien de zaak voor de rechter wordt gebracht door de politie of de burger.</span>
-        </div>
+        <ul class="nav-links">
+            <li class="active" onclick="switchSection('ch1')"><i class="fa-solid fa-eye"></i> 1. Economische Visie</li>
+            <li onclick="switchSection('ch2')"><i class="fa-solid fa-building-shield"></i> 2. Salaris Overheid</li>
+            <li onclick="switchSection('ch3')"><i class="fa-solid fa-briefcase"></i> 3. Burgerlijke Beroepen</li>
+            <li onclick="switchSection('ch4')"><i class="fa-solid fa-tree"></i> 4. UWV Werkgelegenheid</li>
+            <li onclick="switchSection('ch5')"><i class="fa-solid fa-mask"></i> 5. Criminele Economie</li>
+            <li onclick="switchSection('ch6')"><i class="fa-solid fa-flask"></i> 6. Drugslabs</li>
+            <li onclick="switchSection('ch7')"><i class="fa-solid fa-money-bill-transfer"></i> 7. Witwassen</li>
+            <li onclick="switchSection('ch8')"><i class="fa-solid fa-gun"></i> 8. Overvalbeleid</li>
+            <li onclick="switchSection('ch9')"><i class="fa-solid fa-users"></i> 9. Gang & MC Beleid</li>
+            <li onclick="switchSection('ch10')"><i class="fa-solid fa-car"></i> 10. Voertuigmarkt</li>
+            <li onclick="switchSection('ch11')"><i class="fa-solid fa-house"></i> 11. Woningmarkt</li>
+            <li onclick="switchSection('ch12')"><i class="fa-solid fa-percent"></i> 12. Belastingen</li>
+            <li onclick="switchSection('ch13')"><i class="fa-solid fa-heart-pulse"></i> 13. Medisch Systeem</li>
+            <li onclick="switchSection('ch14')"><i class="fa-solid fa-scale-balanced"></i> 14. Boetesysteem</li>
+            <li onclick="switchSection('ch15')"><i class="fa-solid fa-store"></i> 15. Bedrijvensysteem</li>
+            <li onclick="switchSection('ch16')"><i class="fa-solid fa-handcuffs"></i> 16. Strafmaten & Gevangenis</li>
+            <li onclick="switchSection('ch17')"><i class="fa-solid fa-shield-halved"></i> 17. Politie & DTF Beleid</li>
+            <li onclick="switchSection('ch18')"><i class="fa-solid fa-chart-line"></i> 18. Economisch Balansbeleid</li>
+            <li onclick="switchSection('ch19')"><i class="fa-solid fa-user-gear"></i> 19. Staff & Besluitvorming</li>
+        </ul>
     </div>
 
-    <div id="Openbareorde" class="section-card">
-        <h2>Hoofdstuk 2: Openbare Orde</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.1: Dragen van gezichtsbedekkende kleding</span>
-            <span class="lid">gezichtsbedekkende kleding is verboden nabij blokkenpark,overheidsgebouwen,banken</span>
-            <span class="lid">2.3.1 Eerste keer | <b>Boete €100,00</b></span>
-            <span class="lid">2.3.2 Tweerde keer | <b>Boete €200,00</b></span>
-            <span class="lid">2.3.3 Derde keer | <b>Boete €300,00</b></span>
+    <div class="content">
+        
+        <div id="ch1" class="section active">
+            <h1>1. Economische Visie</h1>
+            <p>De BuurtRP is een serieuze roleplay-server waarbij legale beroepen de fundering vormen van de economie[cite: 4]. Criminaliteit moet aantrekkelijk zijn, maar mag nooit de dominante inkomstenbron worden[cite: 5].</p>
+            <h2>Doelstellingen</h2>
+            <ul>
+                <li><strong>60% tot 80%</strong> van alle inkomsten wordt legaal verdiend[cite: 7].</li>
+                <li><strong>20% tot 40%</strong> van alle inkomsten wordt illegaal verdiend[cite: 7].</li>
+                <li>Criminaliteit levert meer op, maar kent hogere risico's[cite: 8].</li>
+                <li>Lange termijn progressie staat centraal[cite: 9].</li>
+                <li>Nieuwe spelers moeten binnen enkele dagen zelfstandig kunnen functioneren[cite: 10].</li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.2: Samenscholing</span>
-            <span class="lid">1. De politie is bevoegd groepen van 3 of meer personen te ontbinden bij vermoeden van verstoring van de openbare orde.</span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.3: Openbare dronkenschap</span>
-            <span class="lid">2.3.1 Eerste keer | <b>Boete €100,00</b></span>
-            <span class="lid">2.3.2 Tweerde keer | <b>Boete €200,00</b></span>
-            <span class="lid">2.3.3 Derde keer | <b>Boete €300,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.4: Niet voldoen aan een bevel of vordering</span>
-            <span class="lid">2.4.1 Eerste keer | <b>Boete €200,00</b></span>
-            <span class="lid">2.4.2 Tweede keer | <b>Boete €300,00</b></span>
-            <span class="lid">2.4.3 Derde keer | <b>Boete €500,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.5: Omkoping van een overheidsfunctionaris</span>
-            <span class="lid">2.5.1 Eerste keer | <b>Boete €3.000,00 & 3 maanden cel</b></span>
-            <span class="lid">2.5.2 Tweede keer | <b>Boete €3.500,00 & 12 maanden cel</b></span>
-            <span class="lid">2.5.3 Derde keer | <b>Boete €5.000,00 & 20 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.6: Identiteitsfraude</span>
-            <span class="lid">2.6.1 Eerste keer | <b>Boete €500,00</b></span>
-            <span class="lid">2.6.2 Tweede keer | <b>Boete €700,00</b></span>
-            <span class="lid">2.6.3 Derde keer | <b>Boete €1.200,00</b></span>
-            <span> class="lid"><b>Bij zware indentiteitsfraude of vaker dan 3 keer word sanctie verhoogd met 50%</b>></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.7: Valse aangifte</span>
-            <span class="lid">2.7.1 Eerste keer | <b>Boete €500,00 & 1 maand cel</b></span>
-            <span class="lid">2.7.2 Tweede keer | <b>Boete €700,00 & 4 maanden cel</b></span>
-            <span class="lid">2.7.3 Derde keer | <b>Boete €1.200,00 & 9 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.8: Belemmering van de rechtsgang</span>
-            <span class="lid">2.8.1 Eerste keer | <b>Boete €1.000,00 </b></span>
-            <span class="lid">2.8.2 Tweede keer | <b>Boete €1.500,00 & 3 maanden cel </b></span>
-            <span class="lid">2.8.3 Derde keer | <b>Boete €2.000,00 & 6 maanden cel </b></span>
-            <span class="lid">2.8.4 Bij zware Belemmering kan de sanctie zwaarder worden bestraft <b>50% Hoger</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.9: Opgeven valse gegevens</span>
-            <span class="lid">2.9.1 Eerste keer | <b>Boete €500,00 </b></span>
-            <span class="lid">2.9.2 Tweede keer | <b>Boete €700,00 </b></span>
-            <span class="lid">2.9.3 Derde keer | <B>Boetre €1.000,00</b></span>
-        </div>
-              <div class="artikel">
-            <span class="artikel-header">Artikel 2.10: Niet tonen van ID bewijs op vordering</span>
-            <span class="lid">2.10.1 Eerste keer | <b>Boete €200,00</b></span>
-            <span class="lid">2.10.2 Tweerde keer | <b>Boete €400,00</b></span>
-            <span class="lid">2.10.3 Derde keer | <b>Boete €600,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.11: Openbare dronkenschap</span>
-            <span class="lid">2.11.1 Eerste keer | <b>Boete €100,00</b></span>
-            <span class="lid">2.11.2 Tweerde keer | <b>Boete €200,00</b></span>
-            <span class="lid">2.11.3 Derde keer | <b>Boete €300,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.12: Deelname of het runnen van een criminele organisatie</span>
-            <span class="lid">2.12.1 Eerste keer | <b>Boete €3.000,00 & 6 maanden cel</b></span>
-            <span class="lid">2.12.2 Tweerde keer | <b>Boete €5.500,00 & 9 maanden cel</b></span>
-            <span class="lid">2.12.3 Derde keer | <b>Boete €10.000,00 & 18 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.13: Lokaalvredebreuk</span>
-            <span class="lid">2.13.1 Eerste keer | <b>Boete €500,00</b></span>
-            <span class="lid">2.13.2 Tweerde keer | <b>Boete €800,00</b></span>
-            <span class="lid">2.13.3 Derde keer | <b>Boete €1.200,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.14: huisvredebreuk</span>
-            <span class="lid">2.14.1 Eerste keer | <b>Boete €500,00</b></span>
-            <span class="lid">2.14.2 Tweerde keer | <b>Boete €800,00</b></span>
-            <span class="lid">2.14.3 Derde keer | <b>Boete €1.200,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.15: Betreden van verboden terrein / gebouw</span>
-            <span class="lid">2.15.1 Eerste keer | <b>Boete €3.000,00 & 6 maanden cel</b></span>
-            <span class="lid">2.15.2 Tweerde keer | <b>Boete €5.500,00 & 9 maanden cel</b></span>
-            <span class="lid">2.15.3 Derde keer | <b>Boete €10.000,00 & 18 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.16: Illegaal jagen</span>
-            <span class="lid">2.16.1 Eerste keer | <b>Boete €3.000,00 & 6 maanden cel</b></span>
-            <span class="lid">2.16.2 Tweerde keer | <b>Boete €6.000,00 & 12 maanden cel</b></span>
-            <span class="lid">2.16.3 Derde keer | <b>Boete €12.000,00 & 24 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.17: Corruptie</span>
-            <span class="lid">2.17.1 Eerste keer | <b>Boete €3.000,00 & 6 maanden cel</b></span>
-            <span class="lid">2.17.2 Tweerde keer | <b>Boete €6.000,00 & 12 maanden cel</b></span>
-            <span class="lid">2.17.3 Derde keer | <b>Boete €12.000,00 & 24 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 2.18: Stalking</span>
-            <span class="lid">2.18.1 Eerste keer | <b>Boete €3000,00 & 1 maanden cel</b></span>
-            <span class="lid">2.18.2 Tweerde keer | <b>Boete €6000,00 & 6 maanden cel</b></span>
-            <span class="lid">2.18.3 Derde keer | <b>Boete €8.000,00 & 12 maanden cel</b></span>
-        </div>
-    </div>
-    
 
-    <div id="Verkeer" class="section-card">
-        <h2>Hoofdstuk 3: Verkeer & Voertuigen</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.1: Verkeersovertredingen</span>
-            <span class="lid">3.1.1 Eerste keer | <b>Boete €500,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.2: Gevaar / hinder zonder ongeval</span>
-            <span class="lid">3.2.1 Eerste keer | <b>Boete €300,00 & 12 uur rijontzegging</b></span>
-            <span class="lid">3.2.2 Tweerde keer | <b>Boete €600,00 & 24 uur rijontzegging</b></span>
-            <span class="lid">3.2.3 Derde keer | <b>Boete €1.000,00 & 24 uur rijontzegging</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.3: Opzettelijk gevaar of hinder veroorzaken</span>
-            <span class="lid">3.3.1 Eerste keer | <b>Boete €300,00 & 12 tot 24 uur rijontzegging</b></span>
-            <span class="lid">3.3.2 Tweerde keer | <b>Boete €1.000,00 & 24 tot 48 uur rijontzegging</b></span>
-            <span class="lid">3.3.3 Derde keer | <b>Boete €1.500,00 & 48 tot 72 uur rijontzegging</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.4: Veroorzaken ongeval</span>
-            <span class="lid">3.4.1 Eerste keer | <b>Boete €3.000,00 & 24 uur rijontzegging</b></span>
-            <span class="lid">3.4.2 Tweerde keer | <b>Boete €4.000,00 & 48 uur rijontzegging</b></span>
-            <span class="lid">3.4.3 Derde keer | <b>Boete €7.000,00 & 48 tot 72 uur rijontzegging</b></span>
-            <span class="lid"><b>Bij het veroorzaken van een zwaar ongeval word het sanctie bedrag met 50% verhoogd, rijontzegging uren blijven tussen de 24 en 72 uur!</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.5: Veroorzaken ongeval met dodelijke afloop</span>
-            <span class="lid">3.5.1 Eerste keer | <b>Boete €3.000,00 & 48 uur rijontzegging</b></span>
-            <span class="lid">3.5.2 Tweerde keer | <b>Boete €7.000,00 & 72 uur rijontzegging</b></span>
-            <span class="lid">3.5.3 Derde keer | <b>Boete €15.000,00 & invordering rijbewijs</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.6: Verlaten plaats ongeval</span>
-            <span class="lid">3.6.1 Eerste keer | <b>Boete €3.000,00 & 6 uur rijontzegging</b></span>
-            <span class="lid">3.6.2 Tweerde keer | <b>Boete €5.000,00 & 12 uur rijontzegging</b></span>
-            <span class="lid">3.6.3 Derde keer | <b>Boete €7.000,00 & 48 uur rijontzegging</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.7: Rijden onder invloed</span>
-            <span class="lid">3.7.1 Eerste keer | <b>Boete €1.000,00 & 12 uur rijontzegging</b></span>
-            <span class="lid">3.7.2 Tweerde keer | <b>Boete €3.000,00 & 24 uur rijontzegging</b></span>
-            <span class="lid">3.7.3 Derde keer | <b>Boete €5.000,00 & 48 uur rijontzegging</b></span>
-            <span class="lid"><b>Meer dan 3 keer gepakt met rijden onder invoed is invordering rijbewijs</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.8: Rijden zonder bevoegdheid</span>
-            <span class="lid">3.8.1 Eerste keer | <b>Boete €1.000,00 </b></span>
-            <span class="lid">3.8.2 Tweerde keer | <b>Boete €3.000,00 </b></span>
-            <span class="lid">3.8.3 Derde keer | <b>Boete €5.000,00 </b></span>
-            <span class="lid"><b>Meer dan 3 keer gepakt met rijden zonder bevoegdheid dan word ook het voertuig inbeslag genomen</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.9: Gevaar / hinder zonder ongeval</span>
-            <span class="lid">3.9.1 Eerste keer | <b>Boete €400,00 </b></span>
-            <span class="lid">3.9.2 Tweerde keer | <b>Boete €800,00 </b></span>
-            <span class="lid">3.9.3 Derde keer | <b>Boete € 1.000,00 + inbeslagname voertuig</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.10:  Rijden zonder kentekenplaten</span>
-            <span class="lid">3.10.1 Eerste keer | <b>Boete €1.000,00 </b></span>
-            <span class="lid">3.10.2 Tweerde keer | <b>Boete €1.200,00 </b></span>
-            <span class="lid">3.10.3 Derde keer | <b>Boete € 1.500,00 + inbeslagname voertuig</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.11: Verlichting (NEON) onder voertuig</span>
-            <span class="lid">3.11.1 Eerste keer | <b>Waarschuwing </b></span>
-            <span class="lid">3.11.2 Tweerde keer | <b>Boete €1.200,00 </b></span>
-            <span class="lid">3.11.3 Derde keer | <b>Boete € 1.500,00 + inbeslagname voertuig</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.12: Ramen dusdanig donker getint</span>
-            <span class="lid">3.12.1 Eerste keer | <b>Waarschuwing </b></span>
-            <span class="lid">3.12.2 Tweerde keer | <b>Boete €1.200,00 </b></span>
-            <span class="lid">3.12.3 Derde keer | <b>Boete € 1.500,00 + inbeslagname voertuig</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.13: Blokkeren van de openbareweg</span>
-            <span class="lid">3.13.1 Eerste keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.13.2 Tweerde keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.13.3 Derde keer | <b>Boete €500,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.14: Onnodig links rijden</span>
-            <span class="lid">3.14.1 Eerste keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.14.2 Tweerde keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.14.3 Derde keer | <b>Boete €500,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.15: Spookrijden</span>
-            <span class="lid">3.15.1 Eerste keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.15.2 Tweerde keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.15.3 Derde keer | <b>Boete €500,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.16: Burnout maken</span>
-            <span class="lid">3.16.1 Eerste keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.16.2 Tweerde keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.16.3 Derde keer | <b>Boete €500,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.17: U-turn maken waar niet toegestaan</span>
-            <span class="lid">3.17.1 Eerste keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.17.2 Tweerde keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.17.3 Derde keer | <b>Boete €500,00</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 3.18: Onnodig claxonneren</span>
-            <span class="lid">3.18.1 Eerste keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.18.2 Tweerde keer | <b>Boete €500,00 </b></span>
-            <span class="lid">3.18.3 Derde keer | <b>Boete €500,00</b></span>
-        </div>
-    </div>
-    
+        <div id="ch2" class="section">
+            <h1>2. Salarisstructuur Overheid</h1>
+            <p>De onderstaande tabel toont de basissalarissen per overheidsonderdeel en rang[cite: 11]:</p>
+            
+            <h2>Politie</h2>
+            <table>
+                <tr><th>Rang</th><th>Salaris</th></tr>
+                <tr><td>Aspirant</td><td>€600</td></tr>
+                <tr><td>Agent</td><td>€650</td></tr>
+                <tr><td>Hoofdagent</td><td>€750</td></tr>
+                <tr><td>Brigadier</td><td>€850</td></tr>
+                <tr><td>Inspecteur</td><td>€1.000</td></tr>
+                <tr><td>Commissaris</td><td>€1.250</td></tr>
+            </table> [cite: 13]
 
-    <div id="Drugshandel" class="section-card">
-        <h2>Hoofdstuk 4: Criminaliteit Drugshandel & Productie</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.1: Drugshandel (1 - 25 Ingrediënten)</span>
-            <span class="lid">4.1.1 Eerste keer | <b>Boete €2.000,00 & 1 maand cel </b></span>
-            <span class="lid">4.1.2 Tweerde keer | <b>Boete €4.000,00 & 2 maanden cel</b></span>
-            <span class="lid">4.1.3 Derde keer | <b>Boete €6.000,00 & 12 maanden cel</b></span>
+            <h2>DTF (Drugs Task Force)</h2>
+            <table>
+                <tr><th>Rang</th><th>Salaris</th></tr>
+                <tr><td>Operator</td><td>€850</td></tr>
+                <tr><td>Senior Operator</td><td>€1.000</td></tr>
+                <tr><td>Teamleider</td><td>€1.200</td></tr>
+                <tr><td>Commandant</td><td>€1.400</td></tr>
+            </table> [cite: 15]
+
+            <h2>Ambulance</h2>
+            <table>
+                <tr><th>Rang</th><th>Salaris</th></tr>
+                <tr><td>Ambulancier</td><td>€700</td></tr>
+                <tr><td>Senior Ambulancier</td><td>€850</td></tr>
+                <tr><td>Hoofd Ambulance</td><td>€1.050</td></tr>
+            </table> [cite: 17]
+
+            <h2>Brandweer</h2>
+            <table>
+                <tr><th>Rang</th><th>Salaris</th></tr>
+                <tr><td>Brandweerman</td><td>€700</td></tr>
+                <tr><td>Senior Brandweerman</td><td>€850</td></tr>
+                <tr><td>Officier</td><td>€1.050</td></tr>
+            </table> [cite: 19]
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.2: Drugshandel (26 - 200 Ingrediënten)</span>
-            <span class="lid">4.2.1 Eerste keer | <b>Boete €2.000,00 & 18 maanden cel </b></span>
-            <span class="lid">4.2.2 Tweerde keer | <b>Boete €4.000,00 & 27 maanden cel</b></span>
-            <span class="lid">4.2.3 Derde keer | <b>Boete €6.000,00 & 48 maanden cel</b></span>
+
+        <div id="ch3" class="section">
+            <h1>3. Burgerlijke Beroepen</h1>
+            <p>Inkomstenstructuur voor burgers werkzaam bij particuliere of private ondernemingen[cite: 20]:</p>
+            <table>
+                <tr><th>Bedrijf</th><th>Functie / Rang</th><th>Salaris</th></tr>
+                <tr><td>Mechanic</td><td>Junior</td><td>€700</td></tr>
+                <tr><td>Mechanic</td><td>Medior</td><td>€900</td></tr>
+                <tr><td>Mechanic</td><td>Senior</td><td>€1.100</td></tr>
+                <tr><td>Cardealer</td><td>Verkoper</td><td>€600</td></tr>
+                <tr><td>Cardealer</td><td>Senior Verkoper</td><td>€850</td></tr>
+                <tr><td>Advocaat</td><td>Junior</td><td>€750</td></tr>
+                <tr><td>Advocaat</td><td>Senior</td><td>€950</td></tr>
+                <tr><td>White-Widow</td><td>Medewerker</td><td>€550</td></tr>
+                <tr><td>White-Widow</td><td>Manager</td><td>€750</td></tr>
+            </table> [cite: 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.3: Drugshandel (201-250 Ingrediënten)</span>
-            <span class="lid">4.3.1 Eerste keer | <b>Boete €8.000,00 & 63 maanden cel </b></span>
-            <span class="lid">4.3.2 Tweerde keer | <b>Boete €10.000,00 & 72 maanden cel</b></span>
-            <span class="lid">4.3.3 Derde keer | <b>Boete €12.000,00 & 81 maanden cel</b></span>
+
+        <div id="ch4" class="section">
+            <h1>4. UWV Werkgelegenheid</h1>
+            <p>Gemiddelde opbrengsten per uur voor de vrije instapbanen via het UWV[cite: 34]:</p>
+            <table>
+                <tr><th>Beroep</th><th>Gemiddelde Opbrengst per uur</th></tr>
+                <tr><td>Houthakker</td><td>€3.000 - €4.000</td></tr>
+                <tr><td>Mijnwerker</td><td>€4.000 - €5.500</td></tr>
+                <tr><td>Visser</td><td>€3.500 - €5.000</td></tr>
+                <tr><td>Hunter</td><td>€4.000 - €6.000</td></tr>
+                <tr><td>Wijnplukker</td><td>€3.000 - #4.500</td></tr>
+                <tr><td>Pakketbezorger</td><td>€3.500 - €4.500</td></tr>
+                <tr><td>Truckdriver</td><td>€4.500 - €6.000</td></tr>
+            </table> [cite: 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48]
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.4: Drugshandel (251-500 Ingrediënten)</span>
-            <span class="lid">4.4.1 Eerste keer | <b>Boete €10.000,00 & 95 maanden cel </b></span>
-            <span class="lid">4.4.2 Tweerde keer | <b>Boete €12.000,00 & 100 maanden cel</b></span>
-            <span class="lid">4.4.3 Derde keer | <b>Boete €15.000,00 & 110 maanden cel</b></span>
+
+        <div id="ch5" class="section">
+            <h1>5. Criminele Economie</h1>
+            <p>Inkomsten gegenereerd uit voertuigcriminaliteit[cite: 49]:</p>
+            
+            <h2>Autodiefstal (Schoon geld)</h2>
+            <table>
+                <tr><th>Voertuigklasse</th><th>Uitbetaling</th></tr>
+                <tr><td>Compact</td><td>€2.500</td></tr>
+                <tr><td>Middenklasse</td><td>€5.000</td></tr>
+                <tr><td>SUV</td><td>€7.500</td></tr>
+                <tr><td>Sportwagen</td><td>€10.000</td></tr>
+            </table> [cite: 51, 52, 53, 54, 55, 56]
+
+            <h2>Carcrusher (Zwart geld)</h2>
+            <table>
+                <tr><th>Voertuigklasse</th><th>Zwart geld opbrengst</th></tr>
+                <tr><td>Compact</td><td>€1.000</td></tr>
+                <tr><td>Middenklasse</td><td>€2.000</td></tr>
+                <tr><td>SUV</td><td>€2.500</td></tr>
+                <tr><td>Sportwagen</td><td>€4.000</td></tr>
+            </table> [cite: 57, 58, 59, 60, 61, 62, 63]
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.5: Drugshandel (501-750 Ingrediënten)</span>
-            <span class="lid">4.5.1 Eerste keer | <b>Boete €13.000,00 & 110 maanden cel </b></span>
-            <span class="lid">4.5.2 Tweerde keer | <b>Boete €18.000,00 & 115 maanden cel</b></span>
-            <span class="lid">4.5.3 Derde keer | <b>Boete €25.000,00 & 120 maanden cel</b></span>
+
+        <div id="ch6" class="section">
+            <h1>6. Drugslabs</h1>
+            <p>Investeringen en verwachte uur-opbrengsten voor illegale drugsproductie[cite: 64]:</p>
+            
+            <h2>Wietlab</h2>
+            <ul>
+                <li><strong>Investering:</strong> €75.000 [cite: 66, 67]</li>
+                <li><strong>Benodigdheden:</strong> Zaden, Potten, Water, Voeding, Droogrekken, Zakjes [cite: 68, 69, 70, 71, 72, 73, 74]</li>
+                <li><strong>Opbrengst:</strong> €4.000 - €6.000 per uur [cite: 75, 76]</li>
+            </ul>
+
+            <h2>Cokelab</h2>
+            <ul>
+                <li><strong>Investering:</strong> €150.000 [cite: 78, 79]</li>
+                <li><strong>Opbrengst:</strong> €6.000 - €9.000 per uur [cite: 80, 81]</li>
+            </ul>
+
+            <h2>Methlab</h2>
+            <ul>
+                <li><strong>Investering:</strong> €300.000 [cite: 83, 84]</li>
+                <li><strong>Opbrengst:</strong> €8.000 - €12.000 per uur [cite: 85, 86]</li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.6: Drugshandel (751-1000 Ingrediënten)</span>
-            <span class="lid">4.6.1 Eerste keer | <b>Boete €13.000,00 & 115 maanden cel </b></span>
-            <span class="lid">4.6.2 Tweerde keer | <b>Boete €18.000,00 & 120 maanden cel</b></span>
-            <span class="lid">4.6.3 Derde keer | <b>Boete €25.000,00 & 125 maanden cel</b></span>
+
+        <div id="ch7" class="section">
+            <h1>7. Witwassen</h1>
+            <p>Het omzetten van illegaal verkregen contanten (zwart geld) naar giraal vermogen (schoon geld)[cite: 87].</p>
+            <div class="alert-box">
+                <strong>Standaard tarief:</strong> 25% verlies op het ingelegde bedrag[cite: 88, 89].
+            </div>
+            <h3>Voorbeeld berekening:</h3>
+            <ul>
+                <li>Inleg: <span class="badge">€100.000</span> zwart geld [cite: 91]</li>
+                <li>Rendement: <span class="badge">€75.000</span> schoon geld op de bankrekening [cite: 92]</li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.7: Drugshandel (1001-1500 Ingrediënten of meer)</span>
-            <span class="lid">4.7.1 Eerste keer | <b>Boete €13.000,00 & 120 maanden cel </b></span>
-            <span class="lid">4.7.2 Tweerde keer | <b>Boete €18.000,00 & 125 maanden cel</b></span>
-            <span class="lid">4.7.3 Derde keer | <b>Boete €25.000,00 & 130 maanden cel</b></span>
+
+        <div id="ch8" class="section">
+            <h1>8. Overvalbeleid</h1>
+            <h2>Algemene regels</h2>
+            <ul>
+                <li>Maximaal 1 actieve grote overval tegelijkertijd in de stad[cite: 95].</li>
+                <li>Geen stacking van grote overvallen[cite: 96]. Cooldowns zijn serverbreed ingesteld[cite: 96].</li>
+            </ul>
+
+            <h2>Overzicht Overvallen</h2>
+            <table>
+                <tr><th>Type Overval</th><th>Minimaal Politie vereist</th><th>Beloning (Zwart/Schoon)</th><th>Server Cooldown</th></tr>
+                <tr><td>ATM Overval</td><td>1 Politie [cite: 99]</td><td>€7.500 - €15.000 [cite: 101]</td><td>15 minuten [cite: 103]</td></tr>
+                <tr><td>Juwelier</td><td>2 Politie [cite: 106]</td><td>€20.000 - €40.000 [cite: 108]</td><td>30 minuten [cite: 110]</td></tr>
+                <tr><td>Bankoverval</td><td>2 Politie + 1 DTF [cite: 113]</td><td>€40.000 - €80.000 [cite: 115]</td><td>45 minuten [cite: 116]</td></tr>
+            </table> [cite: 97, 104, 111]
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.8: Drugs verkoop (1 - 5 producten)</span>
-            <span class="lid">4.8.1 Eerste keer | <b>Boete €2.000,00 & 12 maanden cel </b></span>
-            <span class="lid">4.8.2 Tweerde keer | <b>Boete €3.500,00 & 18 maanden cel</b></span>
-            <span class="lid">4.8.3 Derde keer | <b>Boete €4.000,00 & 20 maanden cel</b></span>
+
+        <div id="ch9" class="section">
+            <h1>9. Gang & MC Beleid</h1>
+            <p>Richtlijnen waaraan officiële groeperingen zich strikt dienen te houden[cite: 118]:</p>
+            <ul>
+                <li>Maximaal <strong>10 leden</strong> per officiële groepering[cite: 119].</li>
+                <li>Geen enkele groepering mag een monopolie op drugs bezitten[cite: 120].</li>
+                <li>Geen enkele groepering mag een monopolie op wapens bezitten[cite: 121].</li>
+                <li><strong>Roleplay (RP) staat ALTIJD boven winst</strong>[cite: 122].</li>
+                <li>Samenwerking tussen verschillende criminele groepen wordt actief gestimuleerd[cite: 123].</li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.9: Drugs verkoop (6 - 40 producten)</span>
-            <span class="lid">4.9.1 Eerste keer | <b>Boete €3.000,00 & 18 maanden cel </b></span>
-            <span class="lid">4.9.2 Tweerde keer | <b>Boete €6.500,00 & 24 maanden cel</b></span>
-            <span class="lid">4.9.3 Derde keer | <b>Boete €8.000,00 & 36 maanden cel</b></span>
+
+        <div id="ch10" class="section">
+            <h1>10. Voertuigmarkt</h1>
+            <p>Gemiddelde aanschafprijzen van civiele voertuigen bij de dealer[cite: 124]:</p>
+            <ul>
+                <li><strong>Instapklasse:</strong> Gemiddeld €40.000 [cite: 125, 126, 127]</li>
+                <li><strong>Middenklasse:</strong> Gemiddeld €60.000 [cite: 128, 129, 130]</li>
+                <li><strong>Sportwagens:</strong> Vanaf €100.000 [cite: 131, 132, 133]</li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.10: Drugs verkoop (41 - 50 producten)</span>
-            <span class="lid">4.10.1 Eerste keer | <b>Boete €5.000,00 & 18 maanden cel </b></span>
-            <span class="lid">4.10.2 Tweerde keer | <b>Boete €7.500,00 & 24 maanden cel</b></span>
-            <span class="lid">4.10.3 Derde keer | <b>Boete €10.000,00 & 36 maanden cel</b></span>
+
+        <div id="ch11" class="section">
+            <h1>11. Woningmarkt</h1>
+            <p>Vaste aanschafprijzen voor onroerend goed[cite: 134]:</p>
+            <ul>
+                <li><strong>Appartement:</strong> €100.000 [cite: 135, 136]</li>
+                <li><strong>Woning:</strong> €250.000 [cite: 137, 138]</li>
+                <li><strong>Villa:</strong> €1.000.000 [cite: 139, 140]</li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.11: Drugs verkoop (51 - 200 producten)</span>
-            <span class="lid">4.11.1 Eerste keer | <b>Boete €7.000,00 & 36 maanden cel </b></span>
-            <span class="lid">4.11.2 Tweerde keer | <b>Boete €9.500,00 & 48 maanden cel</b></span>
-            <span class="lid">4.11.3 Derde keer | <b>Boete €12.000,00 & 72 maanden cel</b></span>
+
+        <div id="ch12" class="section">
+            <h1>12. Belastingen</h1>
+            <p>Periodieke en automatische inhoudingen op inkomsten en bezit[cite: 141]:</p>
+            <ul>
+                <li><strong>Loonbelasting:</strong> 5% per salarisuitbetaling [cite: 142, 143]</li>
+                <li><strong>Voertuigbelasting:</strong> 1% per week over de waarde [cite: 144, 145]</li>
+                <li><strong>Woningbelasting (Wekelijks):</strong>
+                    <ul>
+                        <li>Appartement: €500 / week [cite: 147, 148]</li>
+                        <li>Woning: €1.250 / week [cite: 149, 150]</li>
+                        <li>Villa: €5.000 / week [cite: 151, 152]</li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.12: Drugs verkoop (200 - 500 producten)</span>
-            <span class="lid">4.12.1 Eerste keer | <b>Boete €12.000,00 & 72 maanden cel </b></span>
-            <span class="lid">4.12.2 Tweerde keer | <b>Boete €15.500,00 & 90 maanden cel</b></span>
-            <span class="lid">4.12.3 Derde keer | <b>Boete €20.000,00 & 100 maanden cel</b></span>
+
+        <div id="ch13" class="section">
+            <h1>13. Medisch Systeem</h1>
+            <p>Kosten verbonden aan medische noodhulp en reanimatie[cite: 153]:</p>
+            <ul>
+                <li><strong>Ambulance Revive:</strong> €1.500 [cite: 154, 155]</li>
+                <li><strong>NPC Medic:</strong> Uitsluitend beschikbaar wanneer er geen ambulancemedewerkers in dienst zijn[cite: 156, 157]. 
+                <br><em>Kosten:</em> €3.500[cite: 158, 159].</li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.13: Drugs verkoop (500 - 1000 producten)</span>
-            <span class="lid">4.13.1 Eerste keer | <b>Boete €15.000,00 & 90 maanden cel </b></span>
-            <span class="lid">4.13.2 Tweerde keer | <b>Boete €18.500,00 & 100 maanden cel</b></span>
-            <span class="lid">4.13.3 Derde keer | <b>Boete €22.000,00 & 110 maanden cel</b></span>
+
+        <div id="ch14" class="section">
+            <h1>14. Boetesysteem</h1>
+            <p>Directe administratieve boetes die door de politie kunnen worden uitgeschreven bij overtredingen[cite: 160]:</p>
+            <table>
+                <tr><th>Overtreding</th><th>Boetebedrag</th></tr>
+                <tr><td>Geen geldig rijbewijs</td><td>€2.500</td></tr>
+                <tr><td>Rijden door rood licht</td><td>€500</td></tr>
+                <tr><td>Gevaarlijk rijgedrag vertonen</td><td>€2.500</td></tr>
+                <tr><td>Vluchten voor de politie</td><td>€10.000</td></tr>
+                <tr><td>Handel in verdovende middelen (Drugs)</td><td>€15.000</td></tr>
+                <tr><td>Illegaal Wapenbezit</td><td>€25.000</td></tr>
+            </table> [cite: 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173]
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.14: Drugs verkoop (1000 - 2500 producten)</span>
-            <span class="lid">4.14.1 Eerste keer | <b>Boete €20.000,00 & 115 maanden cel </b></span>
-            <span class="lid">4.14.2 Tweerde keer | <b>Boete €25.500,00 & 125 maanden cel</b></span>
-            <span class="lid">4.14.3 Derde keer | <b>Boete €30.000,00 & 135 maanden cel</b></span>
+
+        <div id="ch15" class="section">
+            <h1>15. Bedrijvensysteem</h1>
+            <p><strong>Opstartkosten eigen onderneming:</strong> €50.000 [cite: 175, 176]</p>
+            <h3>Toegestane bedrijfstypes:</h3>
+            <p>Garage & Takeldienst, Horeca, Beveiliging, Transport & Verhuur, Taxi[cite: 178, 179, 180, 181, 182].</p>
+            
+            <div class="alert-box">
+                <h2>Uitgelicht: Taxi Bedrijf</h2>
+                <p><strong>Functie:</strong> Het handmatig vervoeren van burgers binnen de stadsgrenzen[cite: 183, 184, 185].</p>
+                <ul>
+                    <li>Korte rit: €250 - €500 [cite: 187]</li>
+                    <li>Middellange rit: €500 - €1.000 [cite: 188]</li>
+                    <li>Lange rit: €1.000 - €2.000 [cite: 189]</li>
+                    <li><strong>Gemiddeld uurloon:</strong> €4.000 - €7.000 [cite: 190, 191]</li>
+                </ul>
+                <p><em>Opmerking: Taxi's worden beschouwd als essentiële dienstverlening en vallen volledig onder de legale economie[cite: 192].</em></p>
+            </div>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 4.14: Drugs verkoop (2500 - en meer producten)</span>
-            <span class="lid">4.14.1 Eerste keer | <b>Boete €30.000,00 & 125 maanden cel </b></span>
-            <span class="lid">4.14.2 Tweerde keer | <b>Boete €35.500,00 & 135 maanden cel</b></span>
-            <span class="lid">4.14.3 Derde keer | <b>Boete €40.000,00 & 150 maanden cel</b></span>
+
+        <div id="ch16" class="section">
+            <h1>16. Strafmaten & Gevangenissysteem</h1>
+            <h2>Algemene Richtlijnen</h2>
+            <ul>
+                <li>Straffen moeten te allen tijde gericht zijn op het creëren van roleplay[cite: 195].</li>
+                <li>Excessieve of onredelijke straffen worden te allen tijde vermeden[cite: 196].</li>
+                <li>Recidive (herhaaldelijk plegen) kan leiden tot significante strafverzwaring[cite: 197].</li>
+                <li>Actieve samenwerking met de politie kan leiden tot strafvermindering[cite: 198].</li>
+            </ul>
+
+            <h2>Wettelijke Strafmaatmatrix</h2>
+            <table>
+                <tr><th>Misdrif / Strafbaar Feit</th><th>Geldboete</th><th>Celstraf (Maanden/Minuten)</th></tr>
+                <tr><td>Gevaarlijk rijgedrag</td><td>€2.500 [cite: 202]</td><td>0 - 10 maanden [cite: 204]</td></tr>
+                <tr><td>Vluchten voor Politie</td><td>€10.000 [cite: 207]</td><td>20 - 40 maanden [cite: 208]</td></tr>
+                <tr><td>Diefstal (Algemeen)</td><td>€5.000 [cite: 213]</td><td>10 - 20 maanden [cite: 215]</td></tr>
+                <tr><td>Voertuigdiefstal</td><td>€10.000 [cite: 218]</td><td>20 - 40 maanden [cite: 220]</td></tr>
+                <tr><td>Grootschalige Voertuigdiefstal</td><td>€20.000 [cite: 223]</td><td>40 - 60 maanden [cite: 225]</td></tr>
+                <tr><td>Bezit Softdrugs</td><td>€5.000 [cite: 229]</td><td>10 - 20 maanden [cite: 231]</td></tr>
+                <tr><td>Handel Softdrugs</td><td>€10.000 [cite: 234]</td><td>20 - 40 maanden [cite: 236]</td></tr>
+                <tr><td>Productie Softdrugs</td><td>€15.000 [cite: 239]</td><td>40 - 60 maanden [cite: 241]</td></tr>
+                <tr><td>Handel Harddrugs</td><td>€25.000 [cite: 244]</td><td>60 - 100 maanden [cite: 246]</td></tr>
+                <tr><td>Productie Harddrugs</td><td>€50.000 [cite: 249]</td><td>100 - 150 maanden [cite: 251]</td></tr>
+                <tr><td>Illegaal Wapenbezit</td><td>€25.000 [cite: 255]</td><td>40 - 60 maanden [cite: 257]</td></tr>
+                <tr><td>Handel in Wapens</td><td>€50.000 [cite: 260]</td><td>80 - 120 maanden [cite: 262]</td></tr>
+                <tr><td>ATM Overval</td><td>€15.000 [cite: 266]</td><td>40 - 60 maanden [cite: 268]</td></tr>
+                <tr><td>Juwelier Overval</td><td>€30.000 [cite: 271]</td><td>60 - 90 maanden [cite: 273]</td></tr>
+                <tr><td>Bankoverval</td><td>€50.000 [cite: 276]</td><td>100 - 150 maanden [cite: 278]</td></tr>
+                <tr><td>Witwassen tot €100.000</td><td>€20.000 [cite: 282]</td><td>40 - 60 maanden [cite: 284]</td></tr>
+                <tr><td>Witwassen boven €100.000</td><td>€50.000 [cite: 287]</td><td>80 - 120 maanden [cite: 289]</td></tr>
+                <tr><td>Deelname Criminele Organisatie</td><td>€25.000 [cite: 293]</td><td>60 - 100 maanden [cite: 295]</td></tr>
+                <tr><td>Leidinggeven Criminele Organisatie</td><td>€75.000 [cite: 298]</td><td>120 - 180 maanden [cite: 300]</td></tr>
+            </table> [cite: 199, 210, 226, 252, 263, 279, 290]
+
+            <div class="alert-box" style="border-left-color: red;">
+                <strong>Maximale Strafduur:</strong> De maximale standaard gevangenisstraf bedraagt <strong>180 maanden</strong>[cite: 301, 303]. Uitsluitend hoger staff management mag hier bij unieke roleplay scenario's van afwijken[cite: 304].
+            </div>
         </div>
-    <div id="Vermogensdelicten" class="section-card">
-        <h2>Hoofdstuk 5: Criminaliteit - Vermogensdelicten</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 5.1: Diefstal</span>
-            <span class="lid">5.1.1 Eerste keer | <b>Boete €800,00 & 10 maand cel </b></span>
-            <span class="lid">5.1.2 Tweerde keer | <b>Boete €1.000,00 & 15 maanden cel</b></span>
-            <span class="lid">5.1.3 Derde keer | <b>Boete €2.500,00 & 24 maanden cel</b></span>
+
+        <div id="ch17" class="section">
+            <h1>17. Politie, DTF & Opsporingsbeleid</h1>
+            <h2>17.1 Doelstelling</h2>
+            <p>Politie en DTF dragen zorg voor de openbare orde, opsporing van strafbare feiten, bescherming van burgers en de bestrijding van (georganiseerde) drugscriminaliteit[cite: 305, 307, 308, 309, 310, 311, 312, 313]. Het genereren van kwalitatieve roleplay is leidend, niet het maximaliseren van het aantal arrestaties[cite: 314].</p>
+
+            <h2>17.2 Politiebevoegdheden</h2>
+            <ul>
+                <li><strong>Staande houden:</strong> Toegestaan bij verkeersovertredingen, verdacht gedrag, burgerlijke meldingen of lopende onderzoeken[cite: 317, 319, 320, 321, 322].</li>
+                <li><strong>Fouilleren:</strong> Toegestaan bij redelijk vermoeden van een strafbaar feit, direct na een aanhouding, of binnen een risicogebied[cite: 323, 325, 326, 327].</li>
+                <li><strong>Voertuigcontrole:</strong> Toegestaan bij algemene verkeerscontroles, specifieke meldingen, verdachte omstandigheden of lopende onderzoeken[cite: 328, 330, 331, 332, 333].</li>
+                <li><strong>Aanhouden:</strong> Toegestaan bij het plegen van een strafbaar feit, heterdaad situaties, of bij voldoende wettig bewijs[cite: 334, 336, 337, 338].</li>
+            </ul>
+
+            <h2>17.3 DTF (Drugs Task Force) Bevoegdheden</h2>
+            <p>DTF focust zich op langdurige onderzoeken, drugslabs, witwascircuits, gangs en georganiseerde misdaad[cite: 339, 340, 341, 342, 343, 344, 345, 346, 347]. Zij mogen observatieposten opzetten, verdachten schaduwen, beeldmateriaal verzamelen en kentekens registreren[cite: 349, 350, 351, 352, 353]. Infiltratie is uitsluitend toegestaan na goedkeuring van staff; uitlokking is te allen tijde verboden[cite: 354, 355, 356].</p>
+            
+            <h3>Bijzondere DTF Bevoegdheden:</h3>
+            <ul>
+                <li><strong>Uitgebreide fouillering:</strong> Toegestaan binnen redelijke RP grenzen bij actieve verdenking van drugshandel, witwassen of deelname criminele organisatie[cite: 357, 359, 360, 361, 363, 364].</li>
+                <li><strong>Verhoorlocaties:</strong> Verdachten mogen meegenomen worden naar het bureau, een DTF-steunpunt of een geheime verhoorlocatie (Altijd RP-waardig, geen trolling)[cite: 365, 366, 367, 368, 369, 370, 371, 372].</li>
+                <li><strong>Blinddoekgebruik:</strong> Toegestaan tijdens transport naar geheime locaties, mits uitsluitend ingezet voor lopende onderzoeken binnen de georganiseerde criminaliteit[cite: 374, 375, 376, 377].</li>
+                <li><strong>Verlengde onderzoeksdetentie:</strong> DTF mag een verdachte maximaal <strong>60 minuten RP-tijd</strong> vasthouden ten behoeve van netwerkanalyse of labonderzoek[cite: 378, 379, 380, 381, 382, 383, 386].</li>
+                <li><strong>Verplichte overdracht:</strong> Na het DTF-onderzoek wordt de verdachte ALTIJD overgedragen aan de reguliere politie voor de strafverwerking (boetes en rapportages)[cite: 387, 388, 389].</li>
+            </ul>
+
+            <h2>17.4 t/m 17.13 Procedures & Regels</h2>
+            <ul>
+                <li><strong>Bewijsvoering:</strong> Direct bewijs omvat dashcams, bodycams, camera-opnames, screenshots en bekentenissen[cite: 391, 394, 395, 396, 397, 398, 399]. Indirect bewijs omvat getuigenverklaringen, locatie- en telefoongegevens[cite: 400, 401]. <em>Onvoldoende bewijs:</em> Onderbuikgevoel, geruchten, Discord-informatie en meta-gaming[cite: 403, 404, 405, 406, 407, 408].</li>
+                <li><strong>Huiszoekingen:</strong> Toegestaan bij lopend onderzoek met voldoende bewijs en akkoord van een leidinggevende[cite: 409, 410, 411]. Kasten/personen mogen gecontroleerd worden, goederen mogen niet zonder reden vernield of meegenomen worden[cite: 412, 413, 414, 415, 417, 418, 419].</li>
+                <li><strong>Bedrijfsinvallen:</strong> Vereist concreet bewijs (witwassen/drugshandel/wapenopslag) en expliciete toestemming van de leiding[cite: 420, 421, 422, 423, 425, 426, 427, 428].</li>
+                <li><strong>Drugslab Invallen:</strong> Toegestaan als locatie en bewijs rond zijn. Minimale inzet: 2 politie-eenheden en 1 DTF-operator (DTF verplicht bij grote labs)[cite: 429, 430, 431, 432, 433, 434].</li>
+                <li><strong>Inbeslagname & Impound:</strong> Beslaglegging op drugs, wapens, zwart geld en gestolen goederen is toegestaan[cite: 435, 436, 437, 438, 439]. Voertuigen ingezet bij misdrijven worden ingenomen. <em>Impoundkosten:</em> €2.500[cite: 446, 447, 448, 451, 452].</li>
+                <li><strong>Achtervolgingen:</strong> Houd rekening met burgers en RP kwaliteit[cite: 453, 454, 456, 457]. Afbreken is verplicht zodra het risico voor burgers te groot wordt, of wanneer staff hierom verzoekt[cite: 458, 459, 460].</li>
+                <li><strong>Corruptie:</strong> Corrupt gedrag binnen Politie, DTF, Ambulance of Brandweer is **streng verboden**, tenzij onderdeel van een goedgekeurd staff-event[cite: 475, 476, 477, 478, 479, 480, 481, 482].</li>
+            </ul>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 5.2: Gekwalificeerde Diefstal</span>
-            <span class="lid">5.2.1 Eerste keer | <b>Boete €1000,00 & 24 maand cel </b></span>
-            <span class="lid">5.2.2 Tweerde keer | <b>Boete €1.200,00 & 24 maanden cel</b></span>
-            <span class="lid">5.2.3 Derde keer | <b>Boete €3.500,00 & 36 maanden cel</b></span>
+
+        <div id="ch18" class="section">
+            <h1>18. Economisch Balansbeleid</h1>
+            <p>Het balansbeleid waarborgt een inflatievrije, gezonde economie voor langdurige spelersprogressie[cite: 492, 493, 494].</p>
+            <h2>Vermogensmonitoring & Limieten</h2>
+            <p>Staff monitort periodiek alle banktegoeden, cash geld en bedrijfs-/criminele vermogens[cite: 495, 496, 497, 498, 499, 500]. Bij extreme groei volgt onderzoek[cite: 501].</p>
+            
+            <h3>Bezitslimieten per speler:</h3>
+            <ul>
+                <li><strong>Voertuigen:</strong> Maximaal 5 persoonlijke voertuigen, 2 motoren, 1 boot (bedrijfsvoertuigen uitgezonderd)[cite: 502, 503, 504, 505, 506, 507].</li>
+                <li><strong>Vastgoed:</strong> Maximaal 1 appartement, 1 woning en 1 villa per speler[cite: 508, 509, 510, 511, 512].</li>
+                <li><strong>Groeperingen:</strong> Maximaal 5 gangs en 3 MC's serverbreed actief[cite: 514, 515, 516, 517].</li>
+            </ul>
+            <p><em>Staff behoudt het recht marktcorrecties toe te passen op prijzen, salarissen en belastingen om misbruik of exploits tegen te gaan[cite: 519, 520, 521, 522, 525, 526, 527, 531, 532].</em></p>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 5.3:  Diefstal met geweld / Overval</span>
-            <span class="lid">5.3.1 Eerste keer | <b>Boete €2500,00 & 40maand cel </b></span>
-            <span class="lid">5.3.2 Tweerde keer | <b>Boete €3.200,00 & 80 maanden cel</b></span>
-            <span class="lid">5.3.3 Derde keer | <b>Boete €5.500,00 & 150 maanden cel</b></span>
+
+        <div id="ch19" class="section">
+            <h1>19. Staff Richtlijnen & Economische Besluitvorming</h1>
+            <p>De absolute eindverantwoordelijkheid voor alle beleidsmatige, financiële en organisatorische structuren ligt uitsluitend bij de <strong>Eigenaar</strong> en <strong>Mede-Eigenaar</strong>[cite: 538, 542, 543, 544, 545].</p>
+            
+            <h2>Exclusieve Bevoegdheden</h2>
+            <p>Alleen de eigenaren mogen beslissingen nemen over salarissen, belastingen, vastgoedprijzen, cooldowns, witwaspercentages en het goedkeuren/sluiten van bedrijven[cite: 547, 548, 549, 550, 551, 553, 554, 556, 557, 565, 566, 569].</p>
+            
+            <h2>Staffrechten & Vergaderingen</h2>
+            <p>Reguliere staffleden mogen uitsluitend adviezen, rapportages en problemen signaleren; zij mogen nooit zelfstandig economische waarden aanpassen[cite: 581, 582, 583, 584, 585, 586]. Wijzigingen worden behandeld tijdens de officiële managementvergaderingen[cite: 592, 593]. Bij exploits, bugs of dupes treden direct noodbevoegdheden in werking[cite: 604, 605, 607, 608, 610].</p>
         </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 5.4:  Afpersing</span>
-            <span class="lid">5.4.1 Eerste keer | <b>Boete €3000,00 & 40maand cel </b></span>
-            <span class="lid">5.4.2 Tweerde keer | <b>Boete €3.500,00 & 80 maanden cel</b></span>
-            <span class="lid">5.4.3 Derde keer | <b>Boete €7.000,00 & 150 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 5.5: Witwassen</span>
-            <span class="lid">5.5.1 Eerste keer | <b>Boete €3000,00 & 42 maand cel </b></span>
-            <span class="lid">5.5.2 Tweerde keer | <b>Boete €3.500,00 & 60 maanden cel</b></span>
-            <span class="lid">5.5.3 Derde keer | <b>Boete €7.000,00 & 80 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 5.6: Heling</span>
-            <span class="lid">5.6.1 Eerste keer | <b>Boete €700,00 & 15  maand cel </b></span>
-            <span class="lid">5.6.2 Tweerde keer | <b>Boete €1.000,00 & 60 maanden cel</b></span>
-            <span class="lid">5.6.3 Derde keer | <b>Boete €1.500,00 & 80 maanden cel</b></span>
-        </div>
-    <div id="Geweld" class="section-card">
-        <h2>Hoofdstuk 6: Criminaliteit - Geweld</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.1: Wederspannigheid / verzet</span>
-            <span class="lid">6.1.1 Eerste keer | <b>Boete €800,00 & 10 maand cel </b></span>
-            <span class="lid">6.1.2 Tweerde keer | <b>Boete €1.000,00 & 15 maanden cel</b></span>
-            <span class="lid">6.1.3 Derde keer | <b>Boete €2.500,00 & 20 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.2: Bedreiging</span>
-            <span class="lid">6.2.1 Eerste keer | <b>Boete €800,00 & 10 maand cel </b></span>
-            <span class="lid">6.2.2 Tweerde keer | <b>Boete €1.000,00 & 15 maanden cel</b></span>
-            <span class="lid">6.2.3 Derde keer | <b>Boete €2.500,00 & 20 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.3: Gijzeling</span>
-            <span class="lid">6.3.1 Eerste keer | <b>Boete €0,00 & 45 maand cel </b></span>
-            <span class="lid">6.3.2 Tweerde keer | <b>Boete €3.000,00 & 100 maanden cel</b></span>
-            <span class="lid">6.3.3 Derde keer | <b>Boete €5.500,00 & 150 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.4: Moord</span>
-            <span class="lid">6.4.1 Eerste keer | <b>Boete €5.000,00 & 1000 maand cel </b></span>
-            <span class="lid">6.4.2 Tweerde keer | <b>Boete €8.000,00 & 150 maanden cel</b></span>
-            <span class="lid">6.4.3 Derde keer | <b>Boete €12.500,00 & 240 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.5: Doodslag</span>
-            <span class="lid">6.5.1 Eerste keer | <b>Boete €5.000,00 & 60 maand cel </b></span>
-            <span class="lid">6.5.2 Tweerde keer | <b>Boete €8.000,00 & 100 maanden cel</b></span>
-            <span class="lid">6.5.3 Derde keer | <b>Boete €12.500,00 & 180 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.6: Mishandeling</span>
-            <span class="lid">6.6.1 Eerste keer | <b>Boete €1.200,00 & 10 maand cel </b></span>
-            <span class="lid">6.6.2 Tweerde keer | <b>Boete €2.000,00 & 20 maanden cel</b></span>
-            <span class="lid">6.6.3 Derde keer | <b>Boete €5.500,00 & 80 maanden cel</b></span>
-            <span class="lid">Bij zware mishandeling word de straf verdubbeld.</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.7: Brandstichting</span>
-            <span class="lid">6.7.1 Eerste keer | <b>Boete €3000,00 & 30 maand cel </b></span>
-            <span class="lid">6.7.2 Tweerde keer | <b>Boete €4.500,00 & 80 maanden cel</b></span>
-            <span class="lid">6.7.3 Derde keer | <b>Boete €7.500,00 & 120 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.8: Dood door schuld</span>
-            <span class="lid">6.8.1 Eerste keer | <b>Boete €3000,00 & 30 maand cel </b></span>
-            <span class="lid">6.8.2 Tweerde keer | <b>Boete €5.500,00 & 80 maanden cel</b></span>
-            <span class="lid">6.8.3 Derde keer | <b>Boete €7.500,00 & 120 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 6.9: Terreur misdrijf</span>
-            <span class="lid">6.9.1 Eerste keer | <b>Boete €9000,00 & 150 maand cel </b></span>
-            <span class="lid">6.9.2 Tweerde keer | <b>Boete €15.500,00 & 200 maanden cel</b></span>
-            <span class="lid">6.9.3 Derde keer | <b>Boete €18.500,00 & 240 maanden cel</b></span>
-        </div>
-    <div id="Wapens" class="section-card">
-        <h2>Hoofdstuk 7: Criminaliteit - Wapens</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 7.1: Nepwapens</span>
-            <span class="lid">7.1.1 Eerste keer | <b>Boete €800,00 & 3 maand cel </b></span>
-            <span class="lid">7.1.2 Tweerde keer | <b>Boete €1.000,00 & 6 maanden cel</b></span>
-            <span class="lid">7.1.3 Derde keer | <b>Boete €2.500,00 & 12 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 7.2: Tasers</span>
-            <span class="lid">7.2.1 Eerste keer | <b>Boete €2.000,00 & 6 maand cel </b></span>
-            <span class="lid">7.2.2 Tweerde keer | <b>Boete €4.000,00 & 12 maanden cel</b></span>
-            <span class="lid">7.2.3 Derde keer | <b>Boete €6.000,00 & 24 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 7.3: Vuurwapens en Explosieven</span>
-            <span class="lid">7.3.1 Eerste keer | <b>Boete €7.000,00 & 24 maand cel </b></span>
-            <span class="lid">7.3.2 Tweerde keer | <b>Boete €15.000,00 & 60 maanden cel</b></span>
-            <span class="lid">7.3.3 Derde keer | <b>Boete €20.000,00 & 120 maanden cel</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 7.5: Wapenhandel</span>
-            <span class="lid">7.5.1 Eerste keer | <b>Boete €20.000,00 & 36 maand cel </b></span>
-            <span class="lid">7.5.2 Tweerde keer | <b>Boete €30.000,00 & 60 maanden cel</b></span>
-            <span class="lid">7.5.3 Derde keer | <b>Boete €40.000,00 & 120 maanden cel</b></span>
-        </div>
-    <div id="Rijontzeggingen" class="section-card">
-        <h2>Hoofdstuk 8: Rijontzeggingen & Inbeslagnames</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 8.1: Overtredingen die een punt op je rijbewijs geven</span>
-            <span class="lid">7.1.1 Straatracen | <b>1 punt</b></span>
-            <span class="lid">7.1.2 Vluchten voor politie | <b>1 punt</b></span>
-            <span class="lid">7.1.3 Meerdere keren vluchten voor politie | <b>1 punt</b></span>
-            <span class="lid">7.1.4 Rijden onder invloed | <b>1 punt</b></span>
-            <span class="lid">7.1.5 Op een persoon inrijden | <b>1 punt</b></span>
-            <span class="lid">7.1.6 Overval | <b>1 punt</b></span>
-            <span class="lid">7.1.7 Voertuig gebruikt bij criminele activiteiten | <b>1 punt</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 8.2: Gevolgen van je punten</span>
-            <span class="lid">8.2.1 1 punt | <b>waarschuwing</b></span>
-            <span class="lid">8.2.2 2 punten | <b>Laatste waarschuwing</b></span>
-            <span class="lid">8.2.3 3 punten | <b>Je voertuig word inbeslag genomen en later verkocht</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 8.3: Donatie voertuigen maatregelen</span>
-            <span class="lid">8.3.1 Donantie voertuigen | <b>1 week inbeslag</b></span>
-            <span class="lid">8.3.2 Gewonnen voertuigen | <b>1 week inbeslag + 10.000 boete</b></span>
-        </div>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 8.4: Rijontzeggingen</span>
-            <span class="lid">8.4.1 Een agent kan een rijontzegging opleggen als hier geen artikel voor is in het wetboek: maximaal <b>24 uur</b>rijontzegging</span>
-            <span class="lid">8.4.2 Een agent moet dit wel met de korpsleiding kortsluiten.</span>
-            <span class="lid">8.4.3 Rijden terwijl er een actieve rijontzegging is <b>+5 dagen rijontzegging</b></span>
-            <span class="lid">8.4.4 Meermaals rijden terwijl er een actieve rijontzegging is <b>Rijbewijs word ongeldig verklaard, je mag 14 dagen geen nieuw rijbewijs halen.</b></span>
-        </div>
-    <div id="Slotbepalingen" class="section-card">
-        <h2>Hoofdstuk 9: Slotbepalingen</h2>
-        <div class="artikel">
-            <span class="artikel-header">Artikel 9.1: Slotbepalingen</span>
-            <span class="lid">9.1.1 Gemeente De buurt behoudt het recht om het wetboek & apv aantepassen.</span>
-            <span class="lid">9.1.2 Gemeente De buurt heeft wijkagenten aangesteld om de stad regels te hanteren.</span>
-            <span class="lid">9.1.3 Gemeente De buurt heeft een burgemeester, de burgemeester mag ten alle tijden handelen ook als er geen artikel voor bestaad.<br>Burgemeester heeft altijd het laatste woord.</span>
-        </div>
+
     </div>
 
-    <footer>
-        <p>&copy; 2026 De Buurt Roleplay - Alle rechten voorbehouden aan de Wijkraad / Gemeente.</p>
-    </footer>
-</div>
-
+    <script>
+        function switchSection(sectionId) {
+            // Verberg alle content secties
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // Haal de actieve status weg van alle knoppen in het menu
+            document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
+            
+            // Toon de gekozen pagina
+            document.getElementById(sectionId).classList.add('active');
+            // Maak het huidige menu-item actief
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 </body>
 </html>
