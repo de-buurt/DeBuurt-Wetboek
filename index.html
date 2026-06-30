@@ -15,14 +15,39 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--main-bg); color: var(--text-color); display: flex; height: 100vh; overflow: hidden; }
+        body { background-color: var(--main-bg); color: var(--text-color); display: flex; height: 100vh; overflow: hidden; position: relative; }
+
+        /* Mobiele Hamburger Menu Knop */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-orange);
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            font-size: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
 
         /* Sidebar Styling */
-        .sidebar { width: 320px; background-color: var(--sidebar-bg); border-right: 2px solid var(--accent-orange); display: flex; flex-direction: column; }
+        .sidebar { 
+            width: 320px; 
+            background-color: var(--sidebar-bg); 
+            border-right: 2px solid var(--accent-orange); 
+            display: flex; 
+            flex-direction: column; 
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
         .logo-container { padding: 20px; text-align: center; border-bottom: 1px solid #333; }
         .logo-container img { max-width: 110px; border-radius: 50%; border: 3px solid var(--accent-orange); }
         .nav-links { list-style: none; overflow-y: auto; flex: 1; padding: 10px; }
-        .nav-links li { padding: 10px 12px; margin-bottom: 5px; border-radius: 5px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; font-size: 14px; }
+        .nav-links li { padding: 12px 12px; margin-bottom: 5px; border-radius: 5px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; font-size: 14px; }
         .nav-links li i { margin-right: 10px; color: var(--accent-orange); width: 20px; text-align: center; }
         .nav-links li:hover, .nav-links li.active { background-color: var(--accent-orange); color: #000; font-weight: bold; }
         .nav-links li:hover i, .nav-links li.active i { color: #000; }
@@ -40,8 +65,9 @@
         ul, ol { margin: 10px 0 20px 25px; line-height: 1.6; }
         li { margin-bottom: 5px; }
         
-        /* Tables */
-        table { width: 100%; border-collapse: collapse; margin: 15px 0 25px 0; background: var(--card-bg); border-radius: 6px; overflow: hidden; }
+        /* Responsive Tables Wrapper */
+        .table-wrapper { width: 100%; overflow-x: auto; margin: 15px 0 25px 0; border-radius: 6px; }
+        table { width: 100%; border-collapse: collapse; background: var(--card-bg); overflow: hidden; min-width: 500px; }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #333; }
         th { background-color: var(--accent-orange); color: #000; font-weight: bold; }
         tr:hover { background-color: #2e2e2e; }
@@ -51,44 +77,63 @@
         .alert-box { background: rgba(255, 102, 0, 0.1); border-left: 4px solid var(--accent-orange); padding: 15px; margin: 20px 0; border-radius: 4px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Media Queries voor Mobiel en Tablet */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .content {
+                padding: 80px 20px 40px 20px; /* Ruimte bovenin voor de menuknop */
+            }
+            h1 { font-size: 24px; }
+            h2 { font-size: 18px; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navigatie Menu -->
-    <div class="sidebar">
+    <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+
+    <div class="sidebar" id="sidebar">
         <div class="logo-container">
             <img src="de_buurt_logo.jpg" alt="De Buurt Logo">
             <h3 style="margin-top:10px; color:white; font-size: 18px;">De BuurtRP</h3>
             <span style="color: #888; font-size: 12px;">Handboek V1 12-06-2026</span>
         </div>
         <ul class="nav-links">
-            <li class="active" onclick="switchSection('ch1')"><i class="fa-solid fa-eye"></i> 1. Economische Visie</li>
-            <li onclick="switchSection('ch2')"><i class="fa-solid fa-building-shield"></i> 2. Salaris Overheid</li>
-            <li onclick="switchSection('ch3')"><i class="fa-solid fa-briefcase"></i> 3. Burgerlijke Beroepen</li>
-            <li onclick="switchSection('ch4')"><i class="fa-solid fa-tree"></i> 4. UWV Werkgelegenheid</li>
-            <li onclick="switchSection('ch5')"><i class="fa-solid fa-mask"></i> 5. Criminele Economie</li>
-            <li onclick="switchSection('ch6')"><i class="fa-solid fa-flask"></i> 6. Drugslabs</li>
-            <li onclick="switchSection('ch7')"><i class="fa-solid fa-money-bill-transfer"></i> 7. Witwassen</li>
-            <li onclick="switchSection('ch8')"><i class="fa-solid fa-gun"></i> 8. Overvalbeleid</li>
-            <li onclick="switchSection('ch9')"><i class="fa-solid fa-users"></i> 9. Gang & MC Beleid</li>
-            <li onclick="switchSection('ch10')"><i class="fa-solid fa-car"></i> 10. Voertuigmarkt</li>
-            <li onclick="switchSection('ch11')"><i class="fa-solid fa-house"></i> 11. Woningmarkt</li>
-            <li onclick="switchSection('ch12')"><i class="fa-solid fa-percent"></i> 12. Belastingen</li>
-            <li onclick="switchSection('ch13')"><i class="fa-solid fa-heart-pulse"></i> 13. Medisch Systeem</li>
-            <li onclick="switchSection('ch14')"><i class="fa-solid fa-scale-balanced"></i> 14. Boetesysteem</li>
-            <li onclick="switchSection('ch15')"><i class="fa-solid fa-store"></i> 15. Bedrijvensysteem</li>
-            <li onclick="switchSection('ch16')"><i class="fa-solid fa-handcuffs"></i> 16. Strafmaten & Gevangenis</li>
-            <li onclick="switchSection('ch17')"><i class="fa-solid fa-shield-halved"></i> 17. Politie & DTF Beleid</li>
-            <li onclick="switchSection('ch18')"><i class="fa-solid fa-chart-line"></i> 18. Economisch Balansbeleid</li>
-            <li onclick="switchSection('ch19')"><i class="fa-solid fa-user-gear"></i> 19. Staff & Besluitvorming</li>
+            <li class="active" onclick="switchSection('ch1', this)"><i class="fa-solid fa-eye"></i> 1. Economische Visie</li>
+            <li onclick="switchSection('ch2', this)"><i class="fa-solid fa-building-shield"></i> 2. Salaris Overheid</li>
+            <li onclick="switchSection('ch3', this)"><i class="fa-solid fa-briefcase"></i> 3. Burgerlijke Beroepen</li>
+            <li onclick="switchSection('ch4', this)"><i class="fa-solid fa-tree"></i> 4. UWV Werkgelegenheid</li>
+            <li onclick="switchSection('ch5', this)"><i class="fa-solid fa-mask"></i> 5. Criminele Economie</li>
+            <li onclick="switchSection('ch6', this)"><i class="fa-solid fa-flask"></i> 6. Drugslabs</li>
+            <li onclick="switchSection('ch7', this)"><i class="fa-solid fa-money-bill-transfer"></i> 7. Witwassen</li>
+            <li onclick="switchSection('ch8', this)"><i class="fa-solid fa-gun"></i> 8. Overvalbeleid</li>
+            <li onclick="switchSection('ch9', this)"><i class="fa-solid fa-users"></i> 9. Gang & MC Beleid</li>
+            <li onclick="switchSection('ch10', this)"><i class="fa-solid fa-car"></i> 10. Voertuigmarkt</li>
+            <li onclick="switchSection('ch11', this)"><i class="fa-solid fa-house"></i> 11. Woningmarkt</li>
+            <li onclick="switchSection('ch12', this)"><i class="fa-solid fa-percent"></i> 12. Belastingen</li>
+            <li onclick="switchSection('ch13', this)"><i class="fa-solid fa-heart-pulse"></i> 13. Medisch Systeem</li>
+            <li onclick="switchSection('ch14', this)"><i class="fa-solid fa-scale-balanced"></i> 14. Boetesysteem</li>
+            <li onclick="switchSection('ch15', this)"><i class="fa-solid fa-store"></i> 15. Bedrijvensysteem</li>
+            <li onclick="switchSection('ch16', this)"><i class="fa-solid fa-handcuffs"></i> 16. Strafmaten & Gevangenis</li>
+            <li onclick="switchSection('ch17', this)"><i class="fa-solid fa-shield-halved"></i> 17. Politie & DTF Beleid</li>
+            <li onclick="switchSection('ch18', this)"><i class="fa-solid fa-chart-line"></i> 18. Economisch Balansbeleid</li>
+            <li onclick="switchSection('ch19', this)"><i class="fa-solid fa-user-gear"></i> 19. Staff & Besluitvorming</li>
         </ul>
     </div>
 
-    <!-- Content Pagina's -->
     <div class="content">
         
-        <!-- Hoofdstuk 1 -->
         <div id="ch1" class="section active">
             <h1>1. Economische Visie</h1>
             <p>De BuurtRP is een serieuze roleplay-server waarbij legale beroepen de fundering vormen van de economie. Criminaliteit moet aantrekkelijk zijn, maar mag nooit de dominante inkomstenbron worden.</p>
@@ -102,108 +147,119 @@
             </ul>
         </div>
 
-        <!-- Hoofdstuk 2 -->
         <div id="ch2" class="section">
             <h1>2. Salarisstructuur Overheid</h1>
             <p>De onderstaande tabel toont de basissalarissen per overheidsonderdeel en rang:</p>
             
             <h2>Politie</h2>
-            <table>
-                <tr><th>Rang</th><th>Salaris</th></tr>
-                <tr><td>Aspirant</td><td>€600</td></tr>
-                <tr><td>Agent</td><td>€650</td></tr>
-                <tr><td>Hoofdagent</td><td>€750</td></tr>
-                <tr><td>Brigadier</td><td>€850</td></tr>
-                <tr><td>Inspecteur</td><td>€1.000</td></tr>
-                <tr><td>Commissaris</td><td>€1.250</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Rang</th><th>Salaris</th></tr>
+                    <tr><td>Aspirant</td><td>€600</td></tr>
+                    <tr><td>Agent</td><td>€650</td></tr>
+                    <tr><td>Hoofdagent</td><td>€750</td></tr>
+                    <tr><td>Brigadier</td><td>€850</td></tr>
+                    <tr><td>Inspecteur</td><td>€1.000</td></tr>
+                    <tr><td>Commissaris</td><td>€1.250</td></tr>
+                </table>
+            </div>
 
             <h2>DTF (Drugs Task Force)</h2>
-            <table>
-                <tr><th>Rang</th><th>Salaris</th></tr>
-                <tr><td>Operator</td><td>€850</td></tr>
-                <tr><td>Senior Operator</td><td>€1.000</td></tr>
-                <tr><td>Teamleider</td><td>€1.200</td></tr>
-                <tr><td>Commandant</td><td>€1.400</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Rang</th><th>Salaris</th></tr>
+                    <tr><td>Operator</td><td>€850</td></tr>
+                    <tr><td>Senior Operator</td><td>€1.000</td></tr>
+                    <tr><td>Teamleider</td><td>€1.200</td></tr>
+                    <tr><td>Commandant</td><td>€1.400</td></tr>
+                </table>
+            </div>
 
             <h2>Ambulance</h2>
-            <table>
-                <tr><th>Rang</th><th>Salaris</th></tr>
-                <tr><td>Aspirant-Ambulancier</td><td>€600</td></tr>
-                <tr><td>Ambulancier</td><td>€700</td></tr>
-                <tr><td>Senior Ambulancier</td><td>€850</td></tr>
-                <tr><td>Hoofd Ambulance</td><td>€1.050</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Rang</th><th>Salaris</th></tr>
+                    <tr><td>Aspirant-Ambulancier</td><td>€600</td></tr>
+                    <tr><td>Ambulancier</td><td>€700</td></tr>
+                    <tr><td>Senior Ambulancier</td><td>€850</td></tr>
+                    <tr><td>Hoofd Ambulance</td><td>€1.050</td></tr>
+                </table>
+            </div>
 
             <h2>Brandweer</h2>
-            <table>
-                <tr><th>Rang</th><th>Salaris</th></tr>
-                <tr><td>Brandweerman</td><td>€700</td></tr>
-                <tr><td>Senior Brandweerman</td><td>€850</td></tr>
-                <tr><td>Officier</td><td>€1.050</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Rang</th><th>Salaris</th></tr>
+                    <tr><td>Brandweerman</td><td>€700</td></tr>
+                    <tr><td>Senior Brandweerman</td><td>€850</td></tr>
+                    <tr><td>Officier</td><td>€1.050</td></tr>
+                </table>
+            </div>
         </div>
 
-        <!-- Hoofdstuk 3 -->
         <div id="ch3" class="section">
             <h1>3. Burgerlijke Beroepen</h1>
             <p>Inkomstenstructuur voor burgers werkzaam bij particuliere of private ondernemingen:</p>
-            <table>
-                <tr><th>Bedrijf</th><th>Functie / Rang</th><th>Salaris</th></tr>
-                <tr><td>Mechanic</td><td>Junior</td><td>€700</td></tr>
-                <tr><td>Mechanic</td><td>Medior</td><td>€900</td></tr>
-                <tr><td>Mechanic</td><td>Senior</td><td>€1.100</td></tr>
-                <tr><td>Apex (cardealer)</td><td>Verkoper</td><td>€600</td></tr>
-                <tr><td>Apex (cardealer)</td><td>Senior Verkoper</td><td>€850</td></tr>
-                <tr><td>Advocaat</td><td>Junior</td><td>€750</td></tr>
-                <tr><td>Advocaat</td><td>Senior</td><td>€950</td></tr>
-                <tr><td>WhiteWidow</td><td>Medewerker</td><td>€550</td></tr>
-                <tr><td>WhiteWidow</td><td>Manager</td><td>€750</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Bedrijf</th><th>Functie / Rang</th><th>Salaris</th></tr>
+                    <tr><td>Mechanic</td><td>Junior</td><td>€700</td></tr>
+                    <tr><td>Mechanic</td><td>Medior</td><td>€900</td></tr>
+                    <tr><td>Mechanic</td><td>Senior</td><td>€1.100</td></tr>
+                    <tr><td>Apex (cardealer)</td><td>Verkoper</td><td>€600</td></tr>
+                    <tr><td>Apex (cardealer)</td><td>Senior Verkoper</td><td>€850</td></tr>
+                    <tr><td>Advocaat</td><td>Junior</td><td>€750</td></tr>
+                    <tr><td>Advocaat</td><td>Senior</td><td>€950</td></tr>
+                    <tr><td>WhiteWidow</td><td>Medewerker</td><td>€550</td></tr>
+                    <tr><td>WhiteWidow</td><td>Manager</td><td>€750</td></tr>
+                </table>
+            </div>
         </div>
 
-        <!-- Hoofdstuk 4 -->
         <div id="ch4" class="section">
             <h1>4. UWV Werkgelegenheid</h1>
             <p>Gemiddelde opbrengsten per uur voor de vrije instapbanen via het UWV:</p>
-            <table>
-                <tr><th>Beroep</th><th>Gemiddelde Opbrengst per uur</th></tr>
-                <tr><td>Houthakker</td><td>€3.000 - €4.000</td></tr>
-                <tr><td>Mijnwerker</td><td>€4.000 - €5.500</td></tr>
-                <tr><td>Visser</td><td>€3.500 - €5.000</td></tr>
-                <tr><td>Hunter</td><td>€4.000 - €6.000</td></tr>
-                <tr><td>Wijnplukker</td><td>€3.000 - €4.500</td></tr>
-                <tr><td>Pakketbezorger</td><td>€3.500 - €4.500</td></tr>
-                <tr><td>Truckdriver</td><td>€4.500 - €6.000</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Beroep</th><th>Gemiddelde Opbrengst per uur</th></tr>
+                    <tr><td>Houthakker</td><td>€3.000 - €4.000</td></tr>
+                    <tr><td>Mijnwerker</td><td>€4.000 - €5.500</td></tr>
+                    <tr><td>Visser</td><td>€3.500 - €5.000</td></tr>
+                    <tr><td>Hunter</td><td>€4.000 - €6.000</td></tr>
+                    <tr><td>Wijnplukker</td><td>€3.000 - €4.500</td></tr>
+                    <tr><td>Pakketbezorger</td><td>€3.500 - €4.500</td></tr>
+                    <tr><td>Truckdriver</td><td>€4.500 - €6.000</td></tr>
+                </table>
+            </div>
         </div>
 
-        <!-- Hoofdstuk 5 -->
         <div id="ch5" class="section">
             <h1>5. Criminele Economie</h1>
             <p>Inkomsten gegenereerd uit voertuigcriminaliteit:</p>
             
             <h2>Autodiefstal (Schoon geld)</h2>
-            <table>
-                <tr><th>Voertuigklasse</th><th>Uitbetaling</th></tr>
-                <tr><td>Compact</td><td>€2.500</td></tr>
-                <tr><td>Middenklasse</td><td>€5.000</td></tr>
-                <tr><td>SUV</td><td>€7.500</td></tr>
-                <tr><td>Sportwagen</td><td>€10.000</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Voertuigklasse</th><th>Uitbetaling</th></tr>
+                    <tr><td>Compact</td><td>€2.500</td></tr>
+                    <tr><td>Middenklasse</td><td>€5.000</td></tr>
+                    <tr><td>SUV</td><td>€7.500</td></tr>
+                    <tr><td>Sportwagen</td><td>€10.000</td></tr>
+                </table>
+            </div>
 
             <h2>Carcrusher (Zwart geld)</h2>
-            <table>
-                <tr><th>Voertuigklasse</th><th>Zwart geld opbrengst</th></tr>
-                <tr><td>Compact</td><td>€1.000</td></tr>
-                <tr><td>Middenklasse</td><td>€2.000</td></tr>
-                <tr><td>SUV</td><td>€2.500</td></tr>
-                <tr><td>Sportwagen</td><td>€4.000</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Voertuigklasse</th><th>Zwart geld opbrengst</th></tr>
+                    <tr><td>Compact</td><td>€1.000</td></tr>
+                    <tr><td>Middenklasse</td><td>€2.000</td></tr>
+                    <tr><td>SUV</td><td>€2.500</td></tr>
+                    <tr><td>Sportwagen</td><td>€4.000</td></tr>
+                </table>
+            </div>
         </div>
 
-        <!-- Hoofdstuk 6 -->
         <div id="ch6" class="section">
             <h1>6. Drugslabs</h1>
             <p>Investeringen en verwachte uur-opbrengsten voor illegale drugsproductie:</p>
@@ -228,7 +284,6 @@
             </ul>
         </div>
 
-        <!-- Hoofdstuk 7 -->
         <div id="ch7" class="section">
             <h1>7. Witwassen</h1>
             <p>Het omzetten van illegaal verkregen contanten (zwart geld) naar giraal vermogen (schoon geld).</p>
@@ -242,7 +297,6 @@
             </ul>
         </div>
 
-        <!-- Hoofdstuk 8 -->
         <div id="ch8" class="section">
             <h1>8. Overvalbeleid</h1>
             <h2>Algemene regels</h2>
@@ -252,15 +306,16 @@
             </ul>
 
             <h2>Overzicht Overvallen</h2>
-            <table>
-                <tr><th>Type Overval</th><th>Minimaal Politie vereist</th><th>Beloning (Zwart/Schoon)</th><th>Server Cooldown</th></tr>
-                <tr><td>ATM Overval</td><td>1 Politie</td><td>€7.500 - €15.000</td><td>15 minuten</td></tr>
-                <tr><td>Juwelier</td><td>2 Politie</td><td>€20.000 - €40.000</td><td>30 minuten</td></tr>
-                <tr><td>Bankoverval</td><td>2 Politie + 1 DTF</td><td>€40.000 - €80.000</td><td>45 minuten</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Type Overval</th><th>Minimaal Politie vereist</th><th>Beloning (Zwart/Schoon)</th><th>Server Cooldown</th></tr>
+                    <tr><td>ATM Overval</td><td>1 Politie</td><td>€7.500 - €15.000</td><td>15 minutes</td></tr>
+                    <tr><td>Juwelier</td><td>2 Politie</td><td>€20.000 - €40.000</td><td>30 minutes</td></tr>
+                    <tr><td>Bankoverval</td><td>2 Politie + 1 DTF</td><td>€40.000 - €80.000</td><td>45 minutes</td></tr>
+                </table>
+            </div>
         </div>
 
-        <!-- Hoofdstuk 9 -->
         <div id="ch9" class="section">
             <h1>9. Gang & MC Beleid</h1>
             <p>Richtlijnen waaraan officiële groeperingen zich strikt dienen te houden:</p>
@@ -273,7 +328,6 @@
             </ul>
         </div>
 
-        <!-- Hoofdstuk 10 -->
         <div id="ch10" class="section">
             <h1>10. Voertuigmarkt</h1>
             <p>Gemiddelde aanschafprijzen van civiele voertuigen bij de dealer:</p>
@@ -284,7 +338,6 @@
             </ul>
         </div>
 
-        <!-- Hoofdstuk 11 -->
         <div id="ch11" class="section">
             <h1>11. Woningmarkt</h1>
             <p>Vaste aanschafprijzen voor onroerend goed:</p>
@@ -303,21 +356,17 @@
             <br>
             <h2>11.2 Hypothecaire Verplichtingen & Betalingsachterstand</h2>
             <br>
-            <p>11.2.1 Indien er een hypotheek rust op het onroerend goed, is de eigenaar wettelijk verplicht om te zorgen voor voldoende saldo op de bankrekening tijdens de automatische wekelijkse incasso van de gemeente.</p>
+            <p>11.2.1 Indien er een hypotheek rust op het onroerend goed, is de eigenaar wettelijk verplicht om te zorgen for voldoende saldo op de bankrekening tijdens de automatische wekelijkse incasso van de gemeente.</p>
             <p>11.2.2 Mocht de wekelijkse incasso falen wegens onvoldoende saldo, dan treedt er direct een automatische achterstandstermijn van maximaal 14 dagen in werking.</p>
             <p>11.2.3 De burger is gedurende deze 14 dagen zelf verantwoordelijk om contact op te nemen met de Gemeente om tot een betalingsregeling of oplossing te komen.</p>
             <br>
             <h2>11.3 Automatische & Handmatige Onteigening</h2>
             <br>
-            <p>11.3.1 Indien de betalingsachterstand de wettelijke termijn van 14 dagen overschrijdt, verloopt het recht op herstel en gaat de Gemeente over tot onvoorwaardelijke automatische onteigening (het van naam afhalen) van het onroerend goed.</p>
+            <p>11.3.1 Indien de betalingsachterstand de wettelijke termijn van 14 dagen overschrijdt, verlooper het recht op herstel en gaat de Gemeente over tot onvoorwaardelijke automatische onteigening (het van naam afhalen) van het onroerend goed.</p>
             <p>11.3.2 Bij onteigening wegens wanbetaling vervallen alle eerder gedane aanbetalingen en aflossingen aan de staat als contractuele boete. Het object wordt direct weer vrijgegeven voor de openbare verkoop.</p>
             <p>11.3.3 De Gemeente (of de Burgemeester) behoudt te allen tijde het recht om een onroerend goed handmatig van naam te overschrijven of te onteigenen indien de eigenaar permanent onvindbaar is, of de stad voor onbepaalde tijd heeft verlaten.</p>
-
-
-
         </div>
 
-        <!-- Hoofdstuk 12 -->
         <div id="ch12" class="section">
             <h1>12. Belastingen</h1>
             <p>Periodieke en automatische inhoudingen op inkomsten en bezit:</p>
@@ -331,7 +380,6 @@
             </ul>
         </div>
 
-        <!-- Hoofdstuk 13 -->
         <div id="ch13" class="section">
             <h1>13. Medisch Systeem</h1>
             <p>Kosten verbonden aan medische noodhulp en reanimatie:</p>
@@ -342,89 +390,75 @@
             </ul>
         </div>
 
-        <!-- Hoofdstuk 14 -->
         <div id="ch14" class="section">
             <h1>14.1 Boetesysteem</h1>
             <p>Directe administratieve boetes die door de politie kunnen worden uitgeschreven bij overtredingen:</p>
-            <table>
-                <tr><th>Overtreding</th><th>Boetebedrag</th></tr>
-                <tr><td>Geen geldig Identiteitsbewijs</td><td>€1.250</td></tr>
-                <tr><td>Geen geldig rijbewijs</td><td>€2.500</td></tr>
-                <tr><td>Geen geldig rijbewijs kunnen tonen</td><td>€1.000</td></tr>
-                <tr><td>Rijden door rood licht</td><td>€500</td></tr>
-                <tr><td>Gevaarlijk rijgedrag vertonen</td><td>€2.500</td></tr>
-                <tr><td>Vluchten voor de politie</td><td>€10.000</td></tr>
-                <tr><td>Handel in verdovende middelen (Drugs)</td><td>€15.000</td></tr>
-                <tr><td>Illegaal Wapenbezit</td><td>€25.000</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Overtreding</th><th>Boetebedrag</th></tr>
+                    <tr><td>Geen geldig Identiteitsbewijs</td><td>€1.250</td></tr>
+                    <tr><td>Geen geldig rijbewijs</td><td>€2.500</td></tr>
+                    <tr><td>Geen geldig rijbewijs kunnen tonen</td><td>€1.000</td></tr>
+                    <tr><td>Rijden door rood licht</td><td>€500</td></tr>
+                    <tr><td>Gevaarlijk rijgedrag vertonen</td><td>€2.500</td></tr>
+                    <tr><td>Vluchten voor de politie</td><td>€10.000</td></tr>
+                    <tr><td>Handel in verdovende middelen (Drugs)</td><td>€15.000</td></tr>
+                    <tr><td>Illegaal Wapenbezit</td><td>€25.000</td></tr>
+                </table>
+            </div>
 
             <h1>14.2 Maximale Constructiesnelheid Motorvoertuigen & WOK-Regeling</h1>
-
             <h2>14.2.1 Maximale Snelheid & Keuring</h2>
-
             <p>Het is voor burgers verboden om zich binnen de stadsgrenzen te verplaatsen in een motorvoertuig dat een constructiesnelheid (maximale topsnelheid) heeft van meer dan 250 km/u.<br>
                Overgangsregeling: Burgers krijgen vanaf de publicatie van dit artikel 3 dagen de tijd om hun voertuig vrijwillig te laten terugkeuren naar de wettelijk toegestane limiet van 250 km/u bij een erkende keuringsinstantie (Mechanic).<br>
                Gedurende deze overgangsregeling van 3 dagen zal de politie bij een controle op dit artikel uitsluitend een officiële waarschuwing geven en het voertuig voorzien van een WOK-melding (Wacht Op Keuring).</p>
 
             <h2>14.2.2 Handhaving, Rijtest & Medewerkingsplicht</h2>
-
-            <P>Het Korps Landelijke Politiediensten en de Druks Task Force (DTF) zijn bij het vermoeden van een overtreding te allen tijde bevoegd om ter plaatse een rijtest uit te voeren met het voertuig om de werkelijke topsnelheid vast te stellen.<br>
+            <p>Het Korps Landelijke Politiediensten en de Drugs Task Force (DTF) zijn bij het vermoeden van een overtreding te allen tijde bevoegd om ter plaatse een rijtest uit te voeren met het voertuig om de werkelijke topsnelheid vast te stellen.<br>
                De burger is wettelijk verplicht om volledige medewerking te verlenen aan deze rijtest en het voertuig hiervoor tijdelijk over te dragen aan de controlerende ambtenaar.<br>
-               Indien de burger weigert mee te werken aan de rijtest, is de politie of de DTF direct bevoegd om over te gaan tot algehele inbeslagname van het voertuig.<br>
+               Indien de burger weigert mee te werken aan de rijtest, is de politie of de DTF direct bevoegd om over te gaan tot algehele inbeslagname van het voertuig.</p>
 
             <h2>14.2.3 Sancties & Cumulatie WOK-meldingen</h2>
-
             <p>Indien na de overgangsregeling wordt vastgesteld dat een voertuig harder kan rijden dan 250 km/u, wordt er een onvoorwaardelijke geldboete opgelegd van € 15.000,-.<br>
                Het voertuig krijgt bij een geconstateerde overtreding direct een WOK-status en mag niet meer aan het verkeer deelnemen totdat deze is teruggekeurd.<br>
-               Als een voertuig op het moment van controle reeds meer dan 2 actieve WOK-meldingen op zijn naam heeft staan, vervalt het recht op een waarschuwing of hersteltermijn en mag de politie direct overgaan tot inbeslagname van het voertuig.</P>
+               Als een voertuig op het moment van controle reeds meer dan 2 actieve WOK-meldingen op zijn naam heeft staan, vervalt het recht op een waarschuwing of hersteltermijn og mag de politie direct overgaan tot inbeslagname van het voertuig.</p>
 
             <h2>14.2.4 Uitzondering: De WOK-Vergunning</h2>
-
             <p>Een voertuig met een actieve WOK-status mag zich onder geen beding zelfstandig over de openbare weg verplaatsen.<br>
                Uitzondering: De eigenaar van het voertuig kan bij de Gemeente een officiële WOK-vergunning op kenteken aanvragen.<br>
                Deze vergunning verleent de burger het eenmalige recht om het voertuig via de kortste route over de openbare weg te verplaatsen naar een erkende Mechanic, uitsluitend met het doel om het voertuig te laten goedkeuren of terug te laten keuren.</p>
 
             <h2>14.2.5 Algehele Uitzonderingen (Dienst- en Speciale Voertuigen)</h2>
-
-            <p>Voertuigen waarvan het kenteken begint met de onderstaande lettercombinaties zijn volledig vrijgesteld van de bepalingen in dit artikel (inclusief de maximale constructiesnelheid van 250 km/u):<br>
-               <br>
+            <p>Voertuigen waarvan het kenteken begint met de onderstaande lettercombinaties zijn volledig vrijgesteld van de bepalingen in dit artikel (inclusief de maximale constructiesnelheid van 250 km/u):<br><br>
                POL (Politievoertuigen)<br>
                DTF (Drugs Task Force voertuigen)<br>
                AMBU (Ambulance- / Medische voertuigen)<br>
                Brand (Brandweer- / Reddingsvoertuigen)<br>
                MEC ( Mechanic)<br>
                DB (De Buurt Overheidsvoertuigen)<br>
-               VIP (Speciale/Exclusieve VIP voertuigen)<br>
-               <br>
+               VIP (Speciale/Exclusieve VIP voertuigen)<br><br>
                De hierboven genoemde voertuigen mogen de limiet van 250 km/u overschrijden, mits dit noodzakelijk is voor de uitoefening van de desbetreffende functie of status. De politie of DTF mag voor deze kentekens geen rijtest vorderen, boetes uitschrijven of WOK-meldingen registreren.</p>
 
             <h1>14.3 Economische Delicten & Bedrijfsvoering</h1>
-
             <h2>14.3.1 Exclusiviteit van Voertuigreparatie en Tuning (Wet Marktordening Voertuigzaken)</h2>
-
             <p>Het is aan geregistreerde monteurszaken binnen de rechtspersoonlijkheid van De Buurt uitsluitend toegestaan werkzaamheden te verrichten aan de voertuigcategorieën waarvoor zij door het Buurtbestuur zijn gecertificeerd.</p>
 
             <h2>14.3.2 Certificering per onderneming</h2>
-
             <p>a. De onderneming handelend onder de naam "Mechanic / Apex" bezit het exclusieve recht op het repareren, slepen, bergen en tunen van vierwielige motorvoertuigen (auto's).<br>
-            <br>b. De onderneming handelend onder de naam "Redline" bezit het exclusieve recht op het repareren, slepen, bergen en tunen van tweewielige motorvoertuigen (motoren).</p>
+               <br>b. De onderneming handelend onder de naam "Redline" bezit het exclusieve recht op het repareren, slepen, bergen en tunen van tweewielige motorvoertuigen (motoren).</p>
 
             <h2>14.3.3 Uitzonderingsclausule (Spoed bij afwezigheid)</h2>
-
             <p>In afwijking van het bepaalde in lid 1 en lid 2, is het een onderneming toegestaan werkzaamheden aan de niet-gecertificeerde voertuigcategorie te verrichten, uitsluitend indien wordt voldaan aan de volgende cumulatieve voorwaarden:<br>
-            a. Er is sprake van acute pech onderweg of een noodsituatie;<br>
-            b. De primair gecertificeerde onderneming is aantoonbaar gesloten (buiten dienst) op het moment van de melding.<br></p>
+               a. Er is sprake van acute pech onderweg of een noodsituatie;<br>
+               b. De primair gecertificeerde onderneming is aantoonbaar gesloten (buiten dienst) op het moment van de melding.</p>
 
             <h2>14.3.4 Handhaving en Sancties</h2>
-
             <p>Bij overtreding van de in dit artikel vastgestelde marktordening en exclusiviteit, is de handhavende macht (de Politie / het Buurtbestuur) bevoegd de volgende sancties op te leggen aan de exploitant of de uitvoerende werknemer:<br>
-            Eerste overtreding: Een bestuurlijke boete van EUR 25.000,- voor de onderneming. <br>
-            Tweede overtreding: Een bestuurlijke boete van EUR 50.000,- voor de onderneming, inclusief een officiële waarschuwing.<br>
-            Derde overtreding (Recidive): Een tijdelijke sluiting (schorsing van de bedrijfsvergunning) voor de duur van minimaal 48 uur tot maximaal 7 dagen.<br></p>
+               Eerste overtreding: Een bestuurlijke boete van EUR 25.000,- voor de onderneming. <br>
+               Tweede overtreding: Een bestuurlijke boete van EUR 50.000,- voor de onderneming, inclusief een officiële waarschuwing.<br>
+               Derde overtreding (Recidive): Een tijdelijke sluiting (schorsing van de bedrijfsvergunning) voor de duur van minimaal 48 uur tot maximaal 7 dagen.</p>
         </div>
 
-
-        <!-- Hoofdstuk 15 -->
         <div id="ch15" class="section">
             <h1>15. Bedrijvensysteem</h1>
             <p><strong>Opstartkosten eigen onderneming:</strong> €50.000</p>
@@ -444,7 +478,6 @@
             </div>
         </div>
 
-        <!-- Hoofdstuk 16 -->
         <div id="ch16" class="section">
             <h1>16. Strafmaten & Gevangenissysteem</h1>
             <h2>Algemene Richtlijnen</h2>
@@ -456,36 +489,37 @@
             </ul>
 
             <h2>Wettelijke Strafmaatmatrix</h2>
-            <table>
-                <tr><th>Misdrijf / Strafbaar Feit</th><th>Geldboete</th><th>Celstraf (Maanden)</th></tr>
-                <tr><td>Gevaarlijk rijgedrag</td><td>€2.500</td><td>0 - 10 maanden</td></tr>
-                <tr><td>Vluchten voor Politie</td><td>€10.000</td><td>20 - 40 maanden</td></tr>
-                <tr><td>Diefstal (Algemeen)</td><td>€5.000</td><td>10 - 20 maanden</td></tr>
-                <tr><td>Voertuigdiefstal</td><td>€10.000</td><td>20 - 40 maanden</td></tr>
-                <tr><td>Grootschalige Voertuigdiefstal</td><td>€20.000</td><td>40 - 60 maanden</td></tr>
-                <tr><td>Bezit Softdrugs</td><td>€5.000</td><td>10 - 20 maanden</td></tr>
-                <tr><td>Bezit Harddrugs</td><td>€7.500</td><td>13 - 20 maanden</td></tr>
-                <tr><td>Handel Softdrugs</td><td>€10.000</td><td>20 - 40 maanden</td></tr>
-                <tr><td>Productie Softdrugs</td><td>€15.000</td><td>40 - 60 maanden</td></tr>
-                <tr><td>Handel Harddrugs</td><td>€25.000</td><td>60 - 100 maanden</td></tr>
-                <tr><td>Productie Harddrugs</td><td>€50.000</td><td>100 - 150 maanden</td></tr>
-                <tr><td>Illegaal Wapenbezit</td><td>€25.000</td><td>40 - 60 maanden</td></tr>
-                <tr><td>Handel in Wapens</td><td>€50.000</td><td>80 - 120 maanden</td></tr>
-                <tr><td>ATM Overval</td><td>€15.000</td><td>40 - 60 maanden</td></tr>
-                <tr><td>Juwelier Overval</td><td>€30.000</td><td>60 - 90 maanden</td></tr>
-                <tr><td>Bankoverval</td><td>€50.000</td><td>100 - 150 maanden</td></tr>
-                <tr><td>Witwassen tot €100.000</td><td>€20.000</td><td>40 - 60 maanden</td></tr>
-                <tr><td>Witwassen boven €100.000</td><td>€50.000</td><td>80 - 120 maanden</td></tr>
-                <tr><td>Deelname Criminele Organisatie</td><td>€25.000</td><td>60 - 100 maanden</td></tr>
-                <tr><td>Leidinggeven Criminele Organisatie</td><td>€75.000</td><td>120 - 180 maanden</td></tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr><th>Misdrijf / Strafbaar Feit</th><th>Geldboete</th><th>Celstraf (Maanden)</th></tr>
+                    <tr><td>Gevaarlijk rijgedrag</td><td>€2.500</td><td>0 - 10 maanden</td></tr>
+                    <tr><td>Vluchten voor Politie</td><td>€10.000</td><td>20 - 40 maanden</td></tr>
+                    <tr><td>Diefstal (Algemeen)</td><td>€5.000</td><td>10 - 20 maanden</td></tr>
+                    <tr><td>Voertuigdiefstal</td><td>€10.000</td><td>20 - 40 maanden</td></tr>
+                    <tr><td>Grootschalige Voertuigdiefstal</td><td>€20.000</td><td>40 - 60 maanden</td></tr>
+                    <tr><td>Bezit Softdrugs</td><td>€5.000</td><td>10 - 20 maanden</td></tr>
+                    <tr><td>Bezit Harddrugs</td><td>€7.500</td><td>13 - 20 maanden</td></tr>
+                    <tr><td>Handel Softdrugs</td><td>€10.000</td><td>20 - 40 maanden</td></tr>
+                    <tr><td>Productie Softdrugs</td><td>€15.000</td><td>40 - 60 maanden</td></tr>
+                    <tr><td>Handel Harddrugs</td><td>€25.000</td><td>60 - 100 maanden</td></tr>
+                    <tr><td>Productie Harddrugs</td><td>€50.000</td><td>100 - 150 maanden</td></tr>
+                    <tr><td>Illegaal Wapenbezit</td><td>€25.000</td><td>40 - 60 maanden</td></tr>
+                    <tr><td>Handel in Wapens</td><td>€50.000</td><td>80 - 120 maanden</td></tr>
+                    <tr><td>ATM Overval</td><td>€15.000</td><td>40 - 60 maanden</td></tr>
+                    <tr><td>Juwelier Overval</td><td>€30.000</td><td>60 - 90 maanden</td></tr>
+                    <tr><td>Bankoverval</td><td>€50.000</td><td>100 - 150 maanden</td></tr>
+                    <tr><td>Witwassen tot €100.000</td><td>€20.000</td><td>40 - 60 maanden</td></tr>
+                    <tr><td>Witwassen boven €100.000</td><td>€50.000</td><td>80 - 120 maanden</td></tr>
+                    <tr><td>Deelname Criminele Organisatie</td><td>€25.000</td><td>60 - 100 maanden</td></tr>
+                    <tr><td>Leidinggeven Criminele Organisatie</td><td>€75.000</td><td>120 - 180 maanden</td></tr>
+                </table>
+            </div>
 
             <div class="alert-box" style="border-left-color: red;">
                 <strong>Maximale Strafduur:</strong> De maximale standaard gevangenisstraf bedraagt <strong>180 maanden</strong>. Uitsluitend hoger staff management mag hier bij unieke roleplay scenario's van afwijken.
             </div>
         </div>
 
-        <!-- Hoofdstuk 17 -->
         <div id="ch17" class="section">
             <h1>17. Politie, DTF & Opsporingsbeleid</h1>
             <h2>17.1 Doelstelling</h2>
@@ -506,7 +540,7 @@
             <ul>
                 <li><strong>Uitgebreide fouillering:</strong> Toegestaan binnen redelijke RP grenzen bij actieve verdenking van drugshandel, witwassen of deelname criminele organisatie.</li>
                 <li><strong>Verhoorlocaties:</strong> Verdachten mogen meegenomen worden naar het bureau, een DTF-steunpunt of een geheime verhoorlocatie (Altijd RP-waardig, geen trolling).</li>
-                <li><strong>Blinddoekgebruik:</strong> Toegestaan tijdens transport naar geheime locaties, mits uitsluitend ingezet voor lopende onderzoeken binnen de georganiseerde criminaliteit.</li>
+                <li><strong>Blinddoekgebruik:</strong> Toegestaan tijdens transport naar geheime locaties, mits uitsluitend ingezet for lopende onderzoeken binnen de georganiseerde criminaliteit.</li>
                 <li><strong>Verlengde onderzoeksdetentie:</strong> DTF mag een verdachte maximaal <strong>60 minuten RP-tijd</strong> vasthouden ten behoeve van netwerkanalyse of labonderzoek.</li>
                 <li><strong>Verplichte overdracht:</strong> Na het DTF-onderzoek wordt de verdachte ALTIJD overgedragen aan de reguliere politie voor de strafverwerking (boetes en rapportages).</li>
             </ul>
@@ -521,13 +555,10 @@
                 <li><strong>Achtervolgingen:</strong> Houd rekening met burgers en RP kwaliteit. Afbreken is verplicht zodra het risico voor burgers te groot wordt, of wanneer staff hierom verzoekt.</li>
                 <li><strong>Corruptie:</strong> Corrupt gedrag binnen Politie, DTF, Ambulance of Brandweer is <b>streng verboden</b>, tenzij onderdeel van een goedgekeurd staff-event.</li>
                 <li><strong>Roleplay Prioriteit:</strong> Iedere opsporingshandeling moet bijdragen aan roleplay. <b>Verboden:</b> Winnen boven RP, Targeten van spelers zonder aanleiding, OOC-informatie gebruiken, Meta-gaming, Powergaming.<br><b>De kwaliteit van roleplay gaat altijd boven het aantal arrestaties</b></li>
-                <li><strong>Overheids tools diefstal:</strong> Tijdens RP of op wat voor moment dan ook is het volgende verboden: inventory items uit/van Politie/DTF/Ambu/Brandweer weg/mee te nemen en in je eigen inventory testoppen met wat voor reden dan ook.<br><br>bij misbruik zal de STAFF bepalen welke sanctie
-hieraan hangt. ( overheden hebben tools die niet te koop of te vinden zijn en zijn dus niet
-bedoelt voor spelers )</br><br><br>Ook is het verboden deze overheids tools mee te nemen als je uit dienst gaat en in de stad blijft</br></li>
+                <li><strong>Overheids tools diefstal:</strong> Tijdens RP of op wat voor moment dan ook is het volgende verboden: inventory items uit/van Politie/DTF/Ambu/Brandweer weg/mee te nemen en in je eigen inventory testoppen met wat voor reden dan ook.<br><br>bij misbruik zal de STAFF bepalen welke sanctie hieraan hangt. ( overheden hebben tools die niet te koop of te vinden zijn en zijn dus niet bedoelt voor spelers )<br><br>Ook is het verboden deze overheids tools mee te nemen als je uit dienst gaat en in de stad blijft</li>
             </ul>
         </div>
 
-        <!-- Hoofdstuk 18 -->
         <div id="ch18" class="section">
             <h1>18. Economisch Balansbeleid</h1>
             <p>Het balansbeleid waarborgt een inflatievrije, gezonde economie voor langdurige spelersprogressie.</p>
@@ -543,7 +574,6 @@ bedoelt voor spelers )</br><br><br>Ook is het verboden deze overheids tools mee 
             <p><em>Staff behoudt het recht marktcorrecties toe te passen op prijzen, salarissen en belastingen om misbruik of exploits tegen te gaan.</em></p>
         </div>
 
-        <!-- Hoofdstuk 19 -->
         <div id="ch19" class="section">
             <h1>19. Staff Richtlijnen & Economische Besluitvorming</h1>
             <p>De absolute eindverantwoordelijkheid voor alle beleidsmatige, financiële en organisatorische structuren ligt uitsluitend bij de <strong>Eigenaar</strong> en <strong>Mede-Eigenaar</strong>.</p>
@@ -558,12 +588,20 @@ bedoelt voor spelers )</br><br><br>Ook is het verboden deze overheids tools mee 
     </div>
 
     <script>
-        function switchSection(sectionId) {
+        function switchSection(sectionId, element) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
             
             document.getElementById(sectionId).classList.add('active');
-            event.currentTarget.classList.add('active');
+            element.classList.add('active');
+            
+            // Sluit het mobiele menu automatisch na het klikken op een hoofdstuk
+            document.getElementById('sidebar').classList.remove('open');
+        }
+
+        function toggleMenu() {
+            let sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
         }
     </script>
 </body>
