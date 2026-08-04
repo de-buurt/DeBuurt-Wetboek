@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>De BuurtRP - Management Handboek & Wetboek</title>
+    <title>De BuurtRP - APV & Wetboek</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -106,8 +106,8 @@
     <div class="sidebar" id="sidebar">
         <div class="logo-container">
             <img src="de_buurt_logo.jpg" alt="De Buurt Logo">
-            <h3 style="margin-top:10px; color:white; font-size: 18px;">De BuurtRP</h3>
-            <span style="color: #888; font-size: 12px;">Handboek V1 12-06-2026</span>
+            <h3 style="margin-top:10px; color:white; font-size: 18px;">De Buurt RP</h3>
+            <span style="color: #888; font-size: 12px;">APV & Wetboek V2 04-08-2026</span>
         </div>
         <ul class="nav-links">
             <li class="active" onclick="switchSection('ch1', this)"><i class="fa-solid fa-eye"></i> 1. Economische Visie</li>
@@ -123,7 +123,7 @@
             <li onclick="switchSection('ch11', this)"><i class="fa-solid fa-house"></i> 11. Woningmarkt</li>
             <li onclick="switchSection('ch12', this)"><i class="fa-solid fa-percent"></i> 12. Belastingen</li>
             <li onclick="switchSection('ch13', this)"><i class="fa-solid fa-heart-pulse"></i> 13. Medisch Systeem</li>
-            <li onclick="switchSection('ch14', this)"><i class="fa-solid fa-scale-balanced"></i> 14. Wetboek & Boetesysteem</li>
+            <li onclick="switchSection('ch14', this)"><i class="fa-solid fa-scale-balanced"></i> 14. Wetboek, Boetestructuur & APV</li>
             <li onclick="switchSection('ch15', this)"><i class="fa-solid fa-store"></i> 15. Bedrijvensysteem</li>
             <li onclick="switchSection('ch16', this)"><i class="fa-solid fa-shield-halved"></i> 16. Politie & DTF Beleid</li>
             <li onclick="switchSection('ch17', this)"><i class="fa-solid fa-chart-line"></i> 17. Economisch Balansbeleid</li>
@@ -391,10 +391,23 @@
             </ul>
         </div>
 
-        <!-- SAMENGEVOEGD HOOFDSTUK 14: WETBOEK & BOETESYSTEEM -->
+        <!-- VOLLEDIG GECOMBINEERD HOOFDSTUK 14: WETBOEK, BOETESYSTEEM & APV -->
         <div id="ch14" class="section">
-            <h1>14. Wetboek van Strafrecht, Verkeer & Boetesysteem (WvSr & WVW)</h1>
-            <p>Officieel Publicatieblad - Bepalingen, Administratieve Boetes, Wet- & Strafmaatmatrix</p>
+            <h1>14. Wetboek van Strafrecht, Verkeer, Boetesysteem & APV</h1>
+            <p>Officieel Publicatieblad - Bepalingen, Administratieve Boetes, Wet- & Strafmaatmatrix en Serverregels</p>
+
+            <!-- STRAFBEPALINGEN & BAN-SYSTEEM -->
+            <div class="alert-box" style="border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); margin-bottom: 30px;">
+                <h2 style="color: #ff4d4d; margin-top: 0;">⚠️ STRAFBEPALINGEN & BAN-SYSTEEM</h2>
+                <p><strong>De Buurt RP werkt NIET met een taakstraffensysteem.</strong> Bij overtredingen van de APV of serverregels geldt de volgende vaste escalatie-ladder:</p>
+                <ul>
+                    <li><strong>1e overtreding:</strong> Officiële Waarschuwing</li>
+                    <li><strong>2e overtreding:</strong> Officiële Waarschuwing + Ban voor 1 dag</li>
+                    <li><strong>3e overtreding:</strong> Officiële Waarschuwing + Ban voor 2 dagen</li>
+                    <li><strong>4e overtreding:</strong> Officiële Waarschuwing + Ban voor 3 dagen</li>
+                    <li><strong>5e overtreding:</strong> <strong style="color: #ff4d4d;">PERMANENTE BAN!</strong> (Blijkbaar wil je niet serieus roleplayen)</li>
+                </ul>
+            </div>
 
             <h2>14.1 ALGEMENE JURIDISCHE BEPALINGEN</h2>
             
@@ -501,7 +514,7 @@
                         <tr><td><strong>201.2</strong></td><td>Snelheidsovertreding (31 - 50 km/h)</td><td>€2.750</td><td>0 mnd</td><td>Officiële Waarschuwing</td></tr>
                         <tr><td><strong>201.3</strong></td><td>Snelheidsovertreding (50+ km/h)</td><td>€5.500</td><td>5 - 10 mnd</td><td>Invordering Rijbewijs (24u)</td></tr>
                         <tr><td><strong>202</strong></td><td>Gevaarlijk / Roekeloos Rijgedrag (Art. 5)</td><td>€4.000</td><td>5 - 12 mnd</td><td>Invordering Rijbewijs</td></tr>
-                        <tr><td><strong>203</strong></td><td>Rijden unter Invloed (Alcohol/Drugs)</td><td>€4.500</td><td>5 - 10 mnd</td><td>Invordering Rijbewijs & Educatie</td></tr>
+                        <tr><td><strong>203</strong></td><td>Rijden onder Invloed (Alcohol/Drugs)</td><td>€4.500</td><td>5 - 10 mnd</td><td>Invordering Rijbewijs & Educatie</td></tr>
                         <tr><td><strong>204</strong></td><td>Vluchten voor Opsporingsambtenaren</td><td>€12.500</td><td>12 - 22 mnd</td><td>Invordering Rijbewijs + Inbeslagname voertuig</td></tr>
                         <tr><td><strong>205</strong></td><td>Verlaten Plaats Ongeval (Doorrijden)</td><td>€6.500</td><td>10 - 15 mnd</td><td>Invordering Rijbewijs</td></tr>
                     </tbody>
@@ -605,7 +618,184 @@
                 <p><strong>2. Verbeurdverklaring:</strong> Inbeslaggenomen goederen en voertuigen die door het Openbaar Ministerie verbeurd worden verklaard, worden definitief eigendom van de Staat en vernietigd dan wel geveild.</p>
             </div>
 
-            <div class="alert-box" style="border-left-color: #dc3545;">
+            <h2>14.7 ALGEMENE PLAATSELIJKE VERORDENING (APV & SERVERREGELS)</h2>
+            
+            <h3>Artikel 1 - Cheats & Modding</h3>
+            <p>Het gebruik van derden-software, mappen, hacks, cheats of mod-menus die een oneerlijk voordeel opleveren is ten strengste verboden en resulteert in een permanente verbanning.</p>
+
+            <h3>Artikel 2 - Bug Abuse / Exploits</h3>
+            <p>Het opzettelijk misbruiken van fouten (bugs), glitches of spelsystemen om geld, items of voordelen te verkrijgen is verboden. Bugs dienen direct gemeld te worden bij de Staff.</p>
+
+            <h3>Artikel 3 - Meerdere Accounts / Karakters</h3>
+            <p>Het is niet toegestaan om informatie, geld of goederen uit te wisselen tussen je eigen karakters (Multi-charactering). Elk karakter leeft een volledig gescheiden RP-leven.</p>
+
+            <h3>Artikel 5 - Weggeven van Goederen bij Stoppen</h3>
+            <p>Wanneer een speler besluit de server te verlaten, is het verboden om bezittingen, geld of voertuigen weg te geven aan andere spelers. Dit verstoort de economie.</p>
+
+            <h3>Artikel 6 - VDM (Vehicle Deathmatch)</h3>
+            <p>Het opzettelijk aanrijden of doodrijden van spelers met een motorvoertuig zonder geldige, zwaarwichtige roleplay-aanleiding is streng verboden.</p>
+
+            <h3>Artikel 7 - RDM (Random Deathmatch)</h3>
+            <p>Het aanvallen, beschieten of doden van spelers zonder voorafgaande, inhoudelijke en duidelijke roleplay-interactie is niet toegestaan.</p>
+
+            <h3>Artikel 8 - Stream Sniping</h3>
+            <p>Het gebruiken van livestream-beelden van andere spelers om in-game locaties te achterhalen of voordeel te behalen wordt bestraft als ernstige meta-gaming.</p>
+
+            <h3>Artikel 9 - FailRP</h3>
+            <p>Handelingen verrichten die in een serieuze roleplay-omgeving onrealistisch zijn of de immersion van andere spelers verstoren worden aangemerkt als FailRP.</p>
+
+            <h3>Artikel 10 - NVOL (No Value of Life)</h3>
+            <p>Spelers dienen het leven van hun karakter te allen tijde te beschermen. Wanneer je onder schot wordt gehouden of in een levensbedreigende situatie zit, werk je mee.</p>
+
+            <h3>Artikel 11 - New Life Rule (NLR)</h3>
+            <p>Wanneer je karakter "down" gaat en in het ziekenhuis ontwaakt (respawned), ben je alle herinneringen aan de situatie en gebeurtenissen die tot je dood leidden volledig vergeten.</p>
+
+            <h3>Artikel 12 - Overvallen</h3>
+            <p>Overvallen op winkels, banken of spelers dienen te voldoen aan de gestelde limieten en vereiste politiecapaciteit zoals beschreven in Hoofdstuk 8.</p>
+
+            <h3>Artikel 13 - Powergaming</h3>
+            <p>Het afdwingen van roleplay waarbij de tegenpartij geen enkele kans krijgt om te reageren, of het uitvoeren van onmogelijke handelingen zonder me-commands.</p>
+
+            <h3>Artikel 14 - Karakter Breken (OOC)</h3>
+            <p>Het is verboden om in-game uit je rol te vallen (Out Of Character praten). Termen zoals "staff", "headset", "tickets" of "bugs" mogen in-game nooit gebruikt worden.</p>
+
+            <h3>Artikel 15 - GTA Drivestyle</h3>
+            <p>Het onrealistisch besturen van voertuigen, zoals opzettelijk lanceren via schansen, over bergen rijden met een sportwagen of doorrijden met 2 of meer lekke banden is verboden.</p>
+
+            <h3>Artikel 16 - Geen Intentie tot Roleplay</h3>
+            <p>Spelers die uitsluitend inloggen om amok te maken, te trollen of te rellen zonder de intentie om serieuze roleplay neer te zetten worden direct uit de community verwijderd.</p>
+
+            <h3>Artikel 17 - Metagaming</h3>
+            <p>Het gebruiken van informatie die buiten het spel om is verkregen (zoals via Discord, livestreams of OOC-chat) in in-game roleplay-situaties.</p>
+
+            <h3>Artikel 18 - Combatloggen</h3>
+            <p>Het opzettelijk afsluiten van de game (Alt+F4 of quit) om een aanhouding, overval, verlies van items of een RP-situatie te ontlopen.</p>
+
+            <h3>Artikel 20 - Burgers Overvallen</h3>
+            <p>Het overvallen van burgers op straat is gebonden aan regels. Het is verboden om nieuwkomers (starter-spelers) of burgers bij vaste legale werkplekken te overvallen.</p>
+
+            <h3>Artikel 21 - Ongepast Taalgebruik</h3>
+            <p>Het gebruiken van scheldwoorden met ernstige ziektes, racisme, discriminatie of seksistische uitlatingen wordt onder geen beding getolereerd.</p>
+
+            <h3>Artikel 22 - Algemeen Taalgebruik</h3>
+            <p>De voertaal binnen De Buurt RP is Nederlands. Communicatie via voip en chats dient begrijpelijk en respectvol te verlopen.</p>
+
+            <h3>Artikel 23 - Gebruik van Boeien</h3>
+            <p>Het boeien van spelers dient via realistische animaties te verlopen en is alleen toegestaan als daar een duidelijke RP-aanleiding voor is.</p>
+
+            <h3>Artikel 24 - Microfoon</h3>
+            <p>Spelers zijn verplicht te beschikken over een goed functionerende microfoon zonder storende achtergrondgeluiden of ruis.</p>
+
+            <h3>Artikel 25 - Stemvervormers</h3>
+            <p>Het gebruik van een voice-changer is uitsluitend toegestaan voor unieke RP-scenarios (zoals anonieme telefoontjes) en dient realistisch ingesteld te staan.</p>
+
+            <h3>Artikel 26 - Report Spam</h3>
+            <p>Het onnodig spammen van het report-systeem / tickets als er geen sprake is van een directe regelovertreding is niet toegestaan.</p>
+
+            <h3>Artikel 27 - Appartementen</h3>
+            <p>De zogeheten 'safezones' rondom appartementen en starterslocaties dienen gerespecteerd te worden. Hier mag geen geweld of criminaliteit plaatsvinden.</p>
+
+            <h3>Artikel 28 - Achtervolgingen</h3>
+            <p>Achtervolgingen dienen realistisch te verlopen. Het zomaar rammen van voertuigen met hoge snelheid (pit-manoeuvres boven 120 km/u) is niet toegestaan.</p>
+
+            <h3>Artikel 30 - Campen van Locaties</h3>
+            <p>Het opwachten (campen) van spelers bij illegaal/legaal verwerkingspunten, ziekenhuizen of politiebureaus om hen direct te overvallen is verboden.</p>
+
+            <h3>Artikel 31 - Standaard Outfit</h3>
+            <p>Nieuwe burgers dienen zo snel mogelijk hun standaard kleding (de 'ped' outfit) aan te passen in een kledingwinkel naar een uniek uiterlijk.</p>
+
+            <h3>Artikel 32 - Impersonatie van Overheidsmedewerkers</h3>
+            <p>Het voordoen als politieman, ambulancier of brandweerman door middel van kleding of voertuigen zonder dat je deze baan hebt is streng verboden.</p>
+
+            <h3>Artikel 33 - Corruptie</h3>
+            <p>Corruptie binnen overheidsdiensten (Politie, DTF, Ambulance, Brandweer) is verboden, tenzij hiervoor expliciete schriftelijke toestemming van de Staff is gegeven.</p>
+
+            <h3>Artikel 34 - Job hoppen</h3>
+            <p>Het snel opeenvolgend wisselen van overheids- of bedrijfsbanen om items te verzamelen of misbruik te maken van salarissen is niet toegestaan.</p>
+
+            <h3>Artikel 35 - Staff</h3>
+            <p>Instructies van Staffleden dienen te allen tijde direct te worden opgevolgd. Discussies over besluiten worden gevoerd via een Discord-ticket, niet in-game.</p>
+
+            <h3>Artikel 35A - Staff (Ernstige Overtredingen)</h3>
+            <p>Het beledigen, bedreigen of bewust misleiden van Staffleden resulteert in directe uitsluiting van de server.</p>
+
+            <h3>Artikel 36 - Copbaiten</h3>
+            <p>Het opzettelijk uitlokken van de politie (zoals claxonneren, stoer doen of te hard rijden voor het politiebureau) om een achtervolging te starten is verboden.</p>
+
+            <h3>Artikel 37 - Verstoring van Roleplay</h3>
+            <p>Het bewust verstoren van lopende roleplay-scenarios van andere spelers waarin jouw karakter geen enkel aandeel heeft.</p>
+
+            <h3>Artikel 38 - Stemherkenning</h3>
+            <p>Stemherkenning mag gebruikt worden in RP, mits de stem van de speler uniek en herkenbaar is. Bij het dragen van een masker/gezichtsbedekking is voorzichtigheid geboden.</p>
+
+            <h3>Artikel 40 - Regels bij Hostages (Gijzelaars)</h3>
+            <p>a. Een gijzelaar moet een echte burger zijn (geen vrienden/maten afgesproken als 'fake hostage').<br>
+               b. Een gijzelaar dient op een menswaardige en RP-gerichte manier behandeld te worden.</p>
+
+            <h3>Artikel 41 - Criminele Activiteiten tegen Overheidsmedewerkers</h3>
+            <p>Het kidnappen, overvallen of beschieten van hulpverleners (met name de Ambulance in dienst) is streng verboden.</p>
+
+            <h3>Artikel 42 - Bounty's / Beloningen</h3>
+            <p>Het uitloven van een geldbeloning (bounty) op het hoofd van een speler dient te worden goedgekeurd of gemeld voor zover dit grote impact op de server heeft.</p>
+
+            <h3>Artikel 43 - Gebruik van Vuurwapens</h3>
+            <p>Het trekken en gebruiken van een vuurwapen is het zwaarste middel. Dit mag uitsluitend als allerlaatste redmiddel worden ingezet na een opgebouwde RP-lijn.</p>
+
+            <h2>14.8 GANGREGELS</h2>
+
+            <h3>Artikel 45 - Ganglocaties / Huizen</h3>
+            <p>Ganglocaties en ganghuizen dienen gerespecteerd te worden als RP-terrein. Campen rondom vijandelijke ganghuizen of het zonder gegronde RP-redenen binnendringen is niet toegestaan.</p>
+
+            <h3>Artikel 46 - Gangwar Regels</h3>
+            <p>Een gangwar mag uitsluitend gestart worden na duidelijke RP-opbouw en voorafgaande aanmelding/goedkeuring bij de Staff.</p>
+
+            <h3>Artikel 47 - Confiscatie</h3>
+            <p>Het in beslag nemen van eigendommen tijdens criminele conflicten dient binnen de grenzen van de overvalregels te blijven. Totaal leegroven van kasten of accounts zonder duidelijke RP-lijn is verboden.</p>
+
+            <h3>Artikel 48 - Wraakacties</h3>
+            <p>Revenge killing is ten strengste verboden. Zodra je karakter down is gegaan en ontwaakt (NLR), is elke vorm van directe wraakactie op de betrokken personen ongeldig.</p>
+
+            <h2>14.9 OVERIGE REGELS & SYSTEMEN</h2>
+
+            <h3>Artikel 49 - Bodycams</h3>
+            <p>Bodycam- en dashcambeelden mogen in RP gebruikt worden alle autos hebben dashcam (clip) ben lopend dan heb je geen bodycam uitgezonderd overheidsdiensten die hebben wel een bodycam.</p>
+
+            <h3>Artikel 50 - Discord</h3>
+            <p>Het gebruik van externe Discord-kanalen of spraakkanalen tijdens in-game situaties wordt aangemerkt als metagaming.</p>
+
+            <h3>Artikel 51 - Demonstreren</h3>
+            <p>Demonstraties en protesten zijn toegestaan mits vooraf gemeld en goedgekeurd door het Buurtbestuur/Gemeente.</p>
+
+            <h3>Artikel 52 - Erotische Roleplay (ERP)</h3>
+            <p>Erotische roleplay, seksueel getinte handelingen of ongewenste intimiteiten zijn streng verboden op de gehele server.</p>
+
+            <h3>Artikel 53 - Startersgeld</h3>
+            <p>Het misbruiken van nieuwkomers-startersgeld via meerdere accounts of het direct overboeken naar andere spelers verstoort de economie en resulteert in een permanente ban.</p>
+
+            <h3>Artikel 54 - Gebruik van Voertuigen</h3>
+            <p>Voertuigen dienen op een realistische manier gebruikt te worden. Het opzettelijk rammen van andere voertuigen zonder geldige RP-reden is verboden.</p>
+
+            <h3>Artikel 62 - Staffleden / Perm Abuse</h3>
+            <p>Het misbruiken van staff-bevoegdheden, perms of informatie voor eigen in-game voordeel wordt streng afgestraft met directe verwijdering uit het team en een ban.</p>
+
+            <h3>Artikel 63 - Refunds</h3>
+            <p>Refunds voor verloren spullen of geld worden uitsluitend in behandeling genomen via een Discord-ticket met geldig videobewijs (clip).</p>
+
+            <h3>Artikel 65 - Combatstashen</h3>
+            <p>Het opzettelijk opslaan (stashen) van vuurwapens, drugs of gestolen spullen direct tijdens of vlak na een actieve achtervolging/schietpartij is verboden.</p>
+
+            <h3>Artikel 66 - Jachtgeweren</h3>
+            <p>Jachtgeweren en specifiek jachtmateriaal zijn uitsluitend bedoeld voor de legale jacht-job via het UWV. Het inzetten van jachtgeweren bij overvallen of tegen medespelers/politie is verboden.</p>
+
+            <h3>Artikel 67 - Offroad</h3>
+            <p>Rijden op onverharde wegen, bergen en heuvels (offroad) is uitsluitend toegestaan met voertuigen die daar realistisch voor gebouwd zijn (zoals SUV's, quads en terreinwagens).</p>
+
+            <h3>Artikel 68 - Inactiviteit Bedrijfseigenaren / Organisatieleiders (01)</h3>
+            <p>a. Indien de eigenaar, baas of leidinggevende (01) van een geregistreerd bedrijf, overheidsdienst of officiële organisatie langer dan <strong>4 opeenvolgende dagen</strong> niet actief in de stad aanwezig is geweest, vervalt zijn of haar functie als leidinggevende automatisch.<br>
+               b. Bij het verstrijken van deze termijn is de Gemeente / het Buurtbestuur bevoegd om de bedrijfsvergunning in te trekken, het pand te onteigenen of een nieuwe eigenaar/leidinggevende aan te stellen om de continuïteit te waarborgen.<br>
+               c. <strong>Uitzondering:</strong> Afwezigheid langer dan 4 dagen is uitsluitend toegestaan indien dit vooraf schriftelijk is gemeld en goedgekeurd door de Burgemeester of het Buurtbestuur.</p>
+
+            <div class="alert-box" style="border-left-color: #dc3545; margin-top: 25px;">
                 <strong style="color: #ff4d4d;">⚠️ Absolute Strafmaatlimiet:</strong> De maximale standaard gevangenisstraf bedraagt <strong>60 maanden</strong>. Uitsluitend de Meervoudige Kamer van de Rechtbank mag hier bij unieke, grootschalige roleplay-zittingen van afwijken.
             </div>
         </div>
