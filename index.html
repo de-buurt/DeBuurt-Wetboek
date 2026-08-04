@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>De Buurt RP - APV & Wetboek</title>
+    <title>De Buurt RP -  APV & Wetboek</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -52,8 +52,44 @@
         .nav-links li:hover, .nav-links li.active { background-color: var(--accent-orange); color: #000; font-weight: bold; }
         .nav-links li:hover i, .nav-links li.active i { color: #000; }
 
-        /* Content Area */
+        /* Content Area & Searchbox */
         .content { flex: 1; padding: 40px; overflow-y: auto; background: radial-gradient(circle at top right, #22140a, var(--main-bg) 60%); }
+        
+        .search-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--main-bg);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #333;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            background-color: var(--card-bg);
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: var(--accent-orange);
+            font-size: 18px;
+        }
+
         .section { display: none; }
         .section.active { display: block; animation: fadeIn 0.4s; }
         
@@ -107,7 +143,7 @@
         <div class="logo-container">
             <img src="de_buurt_logo.jpg" alt="De Buurt Logo">
             <h3 style="margin-top:10px; color:white; font-size: 18px;">De Buurt RP</h3>
-            <span style="color: #888; font-size: 12px;">APV & Wetboek V2 04-08-2026</span>
+            <span style="color: #888; font-size: 12px;">APV & Wetboek V1 04-08-2026</span>
         </div>
         <ul class="nav-links">
             <li class="active" onclick="switchSection('ch1', this)"><i class="fa-solid fa-eye"></i> 1. Economische Visie</li>
@@ -132,10 +168,16 @@
     </div>
 
     <div class="content">
+
+        <!-- REALTIME ZOEKBALK -->
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="searchInput" class="search-box" placeholder="Zoek in het handboek & wetboek (bijv. artikel, boete, combatlog, overval)..." onkeyup="searchHandboek()">
+        </div>
         
         <div id="ch1" class="section active">
             <h1>1. Economische Visie</h1>
-            <p>De BuurtRP is een serieuze roleplay-server waarbij legale beroepen de fundering vormen van de economie. Criminaliteit moet aantrekkelijk zijn, maar mag nooit de dominante inkomstenbron worden.</p>
+            <p>De Buurt RP is een serieuze roleplay-server waarbij legale beroepen de fundering vormen van de economie. Criminaliteit moet aantrekkelijk zijn, maar mag nooit de dominante inkomstenbron worden.</p>
             <h2>Doelstellingen</h2>
             <ul>
                 <li><strong>60% tot 80%</strong> van alle inkomsten wordt legaal verdiend.</li>
@@ -399,7 +441,7 @@
             <!-- STRAFBEPALINGEN & BAN-SYSTEEM -->
             <div class="alert-box" style="border-left-color: #dc3545; background-color: rgba(220, 53, 69, 0.1); margin-bottom: 30px;">
                 <h2 style="color: #ff4d4d; margin-top: 0;">⚠️ STRAFBEPALINGEN & BAN-SYSTEEM</h2>
-                <p><strong>De Buurt RP werkt NIET met een taakstraffensysteem.</strong> Bij overtredingen van de APV of serverregels geldt de volgende vaste escalatie-ladder:</p>
+                <p><strong>De BuurtRP werkt NIET met een taakstraffensysteem.</strong> Bij overtredingen van de APV en serverregels geldt de volgende vaste escalatie-ladder:</p>
                 <ul>
                     <li><strong>1e overtreding:</strong> Officiële Waarschuwing</li>
                     <li><strong>2e overtreding:</strong> Officiële Waarschuwing + Ban voor 1 dag</li>
@@ -660,7 +702,7 @@
             <p>Het is verboden om in-game uit je rol te vallen (Out Of Character praten). Termen zoals "staff", "headset", "tickets" of "bugs" mogen in-game nooit gebruikt worden.</p>
 
             <h3>Artikel 15 - GTA Drivestyle</h3>
-            <p>Het onrealistisch besturen van voertuigen, zoals opzettelijk lanceren via schansen, over bergen rijden met een sportwagen of doorrijden met 2 of meer lekke banden is verboden.</p>
+            <p>Het onrealistisch besturen van voertuigen, zoals opzettelijk lanceren via schansen, over bergen rijden met een sportwagen of doorrijden met 4 lekke banden is verboden.</p>
 
             <h3>Artikel 16 - Geen Intentie tot Roleplay</h3>
             <p>Spelers die uitsluitend inloggen om amok te maken, te trollen of te rellen zonder de intentie om serieuze roleplay neer te zetten worden direct uit de community verwijderd.</p>
@@ -678,7 +720,7 @@
             <p>Het gebruiken van scheldwoorden met ernstige ziektes, racisme, discriminatie of seksistische uitlatingen wordt onder geen beding getolereerd.</p>
 
             <h3>Artikel 22 - Algemeen Taalgebruik</h3>
-            <p>De voertaal binnen De Buurt RP is Nederlands. Communicatie via voip en chats dient begrijpelijk en respectvol te verlopen.</p>
+            <p>De voertaal binnen De BuurtRP is Nederlands. Communicatie via voip en chats dient begrijpelijk en respectvol te verlopen.</p>
 
             <h3>Artikel 23 - Gebruik van Boeien</h3>
             <p>Het boeien van spelers dient via realistische animaties te verlopen en is alleen toegestaan als daar een duidelijke RP-aanleiding voor is.</p>
@@ -690,7 +732,7 @@
             <p>Het gebruik van een voice-changer is uitsluitend toegestaan voor unieke RP-scenarios (zoals anonieme telefoontjes) en dient realistisch ingesteld te staan.</p>
 
             <h3>Artikel 26 - Report Spam</h3>
-            <p>Het onnodig spammen van het report-systeem / tickets als er geen sprake is van een directe regelovertreding is niet toegestaan.</p>
+            <p>Het onnodig spammen van het report-systeem/tickets als er geen sprake is van een directe regelovertreding is niet toegestaan.</p>
 
             <h3>Artikel 27 - Appartementen</h3>
             <p>De zogeheten 'safezones' rondom appartementen en starterslocaties dienen gerespecteerd te worden. Hier mag geen geweld of criminaliteit plaatsvinden.</p>
@@ -705,16 +747,16 @@
             <p>Nieuwe burgers dienen zo snel mogelijk hun standaard kleding (de 'ped' outfit) aan te passen in een kledingwinkel naar een uniek uiterlijk.</p>
 
             <h3>Artikel 32 - Impersonatie van Overheidsmedewerkers</h3>
-            <p>Het voordoen als politieman, ambulancier of brandweerman door middel van kleding of voertuigen zonder dat je deze baan hebt is streng verboden.</p>
+            <p>Het voordoen als politieman, ambulancier of brandweerman door middel van kleding om intenties te verhullen is streng verboden.</p>
 
             <h3>Artikel 33 - Corruptie</h3>
             <p>Corruptie binnen overheidsdiensten (Politie, DTF, Ambulance, Brandweer) is verboden, tenzij hiervoor expliciete schriftelijke toestemming van de Staff is gegeven.</p>
 
-            <h3>Artikel 34 - Job hoppen</h3>
-            <p>Het snel opeenvolgend wisselen van overheids- of bedrijfsbanen om items te verzamelen of misbruik te maken van salarissen is niet toegestaan. er moet 48 uur tussen elke wissel zijn.</p>
+            <h3>Artikel 34 - Jobhoppen</h3>
+            <p>Het snel opeenvolgend wisselen van overheids- of bedrijfsbanen om items te verzamelen of misbruik te maken van salarissen is niet toegestaan.</p>
 
             <h3>Artikel 35 - Staff</h3>
-            <p>Instructies van Staffleden dienen te allen tijde direct te worden opgevolgd. Discussies over besluiten worden gevoerd via een Discord-ticket, niet in-game.</p>
+            <p>Instructies van Staffleden dienen te allen tijde direct te worden opgevolgd. Discussies over besluiten worden gefoerd via een Discord-ticket, niet in-game.</p>
 
             <h3>Artikel 35A - Staff (Ernstige Overtredingen)</h3>
             <p>Het beledigen, bedreigen of bewust misleiden van Staffleden resulteert in directe uitsluiting van de server.</p>
@@ -758,13 +800,13 @@
             <h2>14.9 OVERIGE REGELS & SYSTEMEN</h2>
 
             <h3>Artikel 49 - Bodycams</h3>
-            <p>Bodycam- en dashcambeelden mogen in RP gebruikt worden alle autos hebben dashcam (clip) ben lopend dan heb je geen bodycam uitgezonderd overheidsdiensten die hebben wel een bodycam.</p>
+            <p>Bodycam- en dashcambeelden mogen in RP alleen als bewijs gebruikt worden indien het item/systeem daadwerkelijk fysiek aanwezig is op of bij het karakter/voertuig.</p>
 
             <h3>Artikel 50 - Discord</h3>
             <p>Het gebruik van externe Discord-kanalen of spraakkanalen tijdens in-game situaties wordt aangemerkt als metagaming.</p>
 
             <h3>Artikel 51 - Demonstreren</h3>
-            <p>Demonstraties en protesten zijn toegestaan mits vooraf gemeld en goedgekeurd door het Buurtbestuur/Gemeente.</p>
+            <p>Demonstraties en protesten zijn toegestaan mits vooraf gemeld bij het Buurtbestuur/Gemeente.</p>
 
             <h3>Artikel 52 - Erotische Roleplay (ERP)</h3>
             <p>Erotische roleplay, seksueel getinte handelingen of ongewenste intimiteiten zijn streng verboden op de gehele server.</p>
@@ -796,14 +838,13 @@
                c. <strong>Uitzondering:</strong> Afwezigheid langer dan 4 dagen is uitsluitend toegestaan indien dit vooraf schriftelijk is gemeld en goedgekeurd door de Burgemeester of het Buurtbestuur.</p>
 
             <h3>Artikel 69 - Omkleden tijdens Roleplay Scenario's</h3>
-            <p>Het is voor burgers en criminele personen streng verboden om zich <strong>binnen 15 minuten</strong> na of tijdens een actief/lopend roleplay-scenario (zoals een achtervolging, schietpartij, overval of opsporingsactie) om te kleden om zo herkenning door opsporingsambtenaren te ontlopen.</p>
+            <p>Het is voor burgers en criminele personen streng verboden om zich <strong>binnen 15 minuten</strong> na of tijdens een actief/lopend roleplay-scenario (zoals een achtervolging, schietpartij, overval en opsporingsactie) om te kleden om zo herkenning door opsporingsambtenaren te ontlopen.</p>
 
             <h3>Artikel 70 - Automatische Belastingen, Faillissement & Account Wipe</h3>
             <p>a. Burgers zijn wettelijk verplicht te zorgen voor voldoende saldo op de bankrekening voor het voldoen van de wekelijkse voertuig- en woningbelastingen.<br>
                b. Indien een speler door langdurige afwezigheid of inactiviteit niet meer in staat is de automatische belastingen te voldoen en het rekeningsaldo daardoor de nulgrens (€ 0,-) bereikt of negatief wordt, treedt er automatisch een staat van <strong>Gerechtelijk Faillissement</strong> in.<br>
                c. Bij het intreden van een faillissement is de Gemeente/het Buurtbestuur bevoegd om openstaande schulden te verrekenen door over te gaan tot de verbeurdverklaring, veiling of onteigening van de geregistreerde bezittingen (zoals voertuigen en vastgoed).<br>
                d. Indien een burger gedurende een aaneengesloten periode van <strong>14 dagen in staat van faillissement</strong> verkeert zonder dit aan te zuiveren of contact op te nemen met het Buurtbestuur, volgt er een volledige <strong>Account Wipe (karakter reset)</strong>. De speler verliest al zijn of haar resterende vorderingen en bezittingen, maar krijgt de mogelijkheid om een nieuw karakter aan te maken en opnieuw te beginnen.</p>
-
 
             <div class="alert-box" style="border-left-color: #dc3545; margin-top: 25px;">
                 <strong style="color: #ff4d4d;">⚠️ Absolute Strafmaatlimiet:</strong> De maximale standaard gevangenisstraf bedraagt <strong>60 maanden</strong>. Uitsluitend de Meervoudige Kamer van de Rechtbank mag hier bij unieke, grootschalige roleplay-zittingen van afwijken.
@@ -902,7 +943,7 @@
             document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
             
             document.getElementById(sectionId).classList.add('active');
-            element.classList.add('active');
+            if(element) element.classList.add('active');
             
             // Sluit het mobiele menu automatisch na het klikken op een hoofdstuk
             document.getElementById('sidebar').classList.remove('open');
@@ -911,6 +952,52 @@
         function toggleMenu() {
             let sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('open');
+        }
+
+        // REALTIME ZOEKFUNCTIE
+        function searchHandboek() {
+            let input = document.getElementById('searchInput').value.toLowerCase().trim();
+            let sections = document.querySelectorAll('.section');
+            let navLinks = document.querySelectorAll('.nav-links li');
+
+            if (input === "") {
+                // Als het zoekveld leeg is, herstel de normale weergave (toon alleen Hoofdstuk 1)
+                sections.forEach(s => s.style.display = "none");
+                document.getElementById('ch1').style.display = "block";
+                
+                // Reset de zoekfilters op elementen
+                document.querySelectorAll('.section h2, .section h3, .section p, .section li, .section .alert-box, .section tr').forEach(el => {
+                    el.style.display = "";
+                });
+                return;
+            }
+
+            // Zoek op alle hoofdstukken tegelijk
+            sections.forEach(section => {
+                let sectionText = section.innerText.toLowerCase();
+                if (sectionText.includes(input)) {
+                    section.style.display = "block"; // Toon het hoofdstuk waar de tekst in staat
+                    
+                    // Filter specifieke elementen binnen het hoofdstuk
+                    let elements = section.querySelectorAll('h2, h3, p, li, .alert-box, tr');
+                    elements.forEach(el => {
+                        // Zorg dat tabelkoppen altijd zichtbaar blijven
+                        if (el.tagName === 'TR' && el.querySelector('th')) {
+                            el.style.display = "";
+                            return;
+                        }
+
+                        if (el.innerText.toLowerCase().includes(input)) {
+                            el.style.display = "";
+                        } else {
+                            el.style.display = "none";
+                        }
+                    });
+
+                } else {
+                    section.style.display = "none";
+                }
+            });
         }
     </script>
 </body>
